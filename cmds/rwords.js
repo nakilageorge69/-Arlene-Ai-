@@ -9,10 +9,10 @@ module.exports = {
   async execute(senderId, args, pageAccessToken) {
     try {
       const response = await axios.get('https://random-hugot-api.onrender.com/random');
-      const { link: random, author, } = response.data;
+      const { random, author, } = response.data;
 
       await sendMessage(senderId, {
-        text: ` 🤣Random: ${random}\n🤣 author: ${author}\n`
+        text: ` 🤣Random: ${random} \n🤣 author: ${author}\n`
       }, pageAccessToken);
 
       
