@@ -19,7 +19,7 @@ module.exports = {
         attachment: {
           type: "video",
           payload: {
-            url: videoUrl
+            url: video
           }
         }
       }, pageAccessToken);
