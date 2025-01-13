@@ -9,7 +9,7 @@ module.exports = {
   async execute(senderId, args, pageAccessToken) {
     try {
       const response = await axios.get('https://random-video-api-sjvq.onrender.com/vid');
-      const { shotiurl: video, random, author, } = response.data;
+      const { video: video, random, author, } = response.data;
 
       await sendMessage(senderId, {
         text: ` Username: ${random}\n💟 author: ${author}\n`
