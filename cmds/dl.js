@@ -19,7 +19,7 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://api.joshweb.click/tiktokdl?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://downloader-api-1.onrender.com/api/getinfo?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const { url, description } = response.data;
 
