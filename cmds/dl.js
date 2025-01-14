@@ -21,7 +21,7 @@ module.exports = {
     try {
       const apiUrl = `https://downloader-api-9kp1.onrender.com/api/getinfo?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
-      const { url, name } = response.data;
+      const { video: url, description, author: name } = response.data;
 
       console.log("Sending message with API URL:", apiUrl); 
       
