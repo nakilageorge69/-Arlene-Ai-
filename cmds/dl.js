@@ -5,7 +5,7 @@ console.log("sendMessage function:", sendMessage);
 
 module.exports = {
   name: "dl",
-  description: "URL Downloader",
+  description: "Generate a voice message based on the prompt",
   role: 1,
   author: "mark",
 
@@ -21,13 +21,11 @@ module.exports = {
     try {
       
       const apiUrl = `https://downloader-api-9kp1.onrender.com/api/getinfo?url=${encodeURIComponent(prompt)}`;
-      const { url: url, name, } = response.data;
+      
 
       console.log("Sending message with API URL:", apiUrl); 
       
-      await sendMessage(senderId, {
-        text: ` Name : ${name} \n`
-      }, pageAccessToken);
+      
 
  
       await sendMessage(senderId, {
