@@ -19,14 +19,14 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://downloader-api-9kp1.onrender.com/api/getinfo?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://api.joshweb.click/tiktokdl?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
-      const { video: url, description, author: name } = response.data;
+      const { url, description } = response.data;
 
       console.log("Sending message with API URL:", apiUrl); 
       
       await sendMessage(senderId, {
-        text: ` Name : ${name} \n`
+        text: ` response : ${description} \n`
       }, pageAccessToken);
       
  
