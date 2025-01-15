@@ -9,7 +9,7 @@ module.exports = {
   async execute(senderId, args, pageAccessToken) {
     try {
       const response = await axios.get('https://rest-api-bot.onrender.com/api/cdp');
-      const { result: one, two, } = response.data;
+      const { one } = response.data;
 
       
 
