@@ -15,7 +15,7 @@ module.exports = {
 
       await sendMessage(senderId, {
         attachment: {
-          type: "photo. ",
+          type: "photo",
           payload: {
             url: one
           }
