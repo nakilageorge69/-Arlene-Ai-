@@ -15,12 +15,14 @@ module.exports = {
 
       await sendMessage(senderId, {
         attachment: {
-          type: "photo",
+          type: "image",
           payload: {
             url: one
           }
         }
       }, pageAccessToken);
+
+      api.sendAttachment("image", "https://i.ibb.co/G9RBVz1/Facebook-Page-Bot-Icon.jpg", event.sender.id);
       
       
       
