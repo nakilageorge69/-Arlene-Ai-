@@ -25,16 +25,13 @@ module.exports = {
 
       console.log("Sending message with API URL:", apiUrl); 
       
-      await sendMessage(senderId, {
-        text: ` Fbdl : ${result} \n`
-      }, pageAccessToken);
       
  
       await sendMessage(senderId, {
         attachment: {
           type: "video",
           payload: {
-            url: url
+            url: result
           }
         }
       }, pageAccessToken);
