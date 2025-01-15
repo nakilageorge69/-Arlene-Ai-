@@ -4,8 +4,8 @@ const { sendMessage } = require("../handles/message");
 console.log("sendMessage function:", sendMessage); 
 
 module.exports = {
-  name: "dl",
-  description: "Generate a voice message based on the prompt",
+  name: "tikdl",
+  description: "TikTok Video Downloader",
   role: 1,
   author: "mark",
 
