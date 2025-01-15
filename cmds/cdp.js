@@ -22,14 +22,7 @@ module.exports = {
         }
       }, pageAccessToken);
       
-      await sendMessage(senderId, {
-        attachment: {
-          type: "photo",
-          payload: {
-            url: two
-          }
-        }
-      }, pageAccessToken);
+      
       
     } catch (error) {
       console.error("nag error chat mo si owner:", error);
