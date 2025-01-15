@@ -9,7 +9,7 @@ module.exports = {
   async execute(senderId, args, pageAccessToken) {
     try {
       const response = await axios.get('https://rest-api-bot.onrender.com/api/cdp');
-      const { one } = response.data;
+      const { one, two } = response.data;
 
       
 
@@ -22,7 +22,16 @@ module.exports = {
         }
       }, pageAccessToken);
 
-      api.sendAttachment("image", "https://i.ibb.co/G9RBVz1/Facebook-Page-Bot-Icon.jpg", event.sender.id);
+      await sendMessage(senderId, {
+        attachment: {
+          type: "image",
+          payload: {
+            url: two
+          }
+        }
+      }, pageAccessToken);
+
+     
       
       
       
