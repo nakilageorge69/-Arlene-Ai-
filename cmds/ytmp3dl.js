@@ -14,19 +14,19 @@ module.exports = {
 
     if (!prompt) {
       return sendMessage(senderId, {
-        text: `Usage: dl [ URL ]`
+        text: `Usage: ytmp3dl [ URL ]`
       }, pageAccessToken);
     }
 
     try {
-      const apiUrl = `https://jonellpogi.serv00.net/yt.php?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://yt-video-production.up.railway.app/ytdl?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
-      const { title, thumbnail } = response.data;
+      const { title, audio } = response.data;
 
       console.log("Sending message with API URL:", apiUrl); 
       
       await sendMessage(senderId, {
-        text: ` Title : ${title} \n Download url ${thumbnail}\n`
+        text: ` Title : ${title} \n Download url ${audio} \n`
       }, pageAccessToken);
       
  
@@ -34,7 +34,7 @@ module.exports = {
         attachment: {
           type: "audio",
           payload: {
-            url: thumbnail
+            url: audio
           }
         }
       }, pageAccessToken);
