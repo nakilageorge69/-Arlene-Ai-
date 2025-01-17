@@ -38,7 +38,7 @@ module.exports = {
         // If no image, use GPT API.  https://rest-api-bot.onrender.com/api/chatgpt?query=${encodeURIComponent(finalPrompt)}`;
         const apiUrl = `https://rest-api-bot.onrender.com/api/chatgpt?query=${encodeURIComponent(finalPrompt)}`;
         //https://rest-api-french3.onrender.com/api/clarencev2`;
-        const response = await axios.get(apiUrl, finalPrompt, sernderId);
+        const response = await axios.get(apiUrl, finalPrompt);
         const gptMessage = response.data.response;
 
         const gptResponse = `${gptMessage}`;
