@@ -35,14 +35,10 @@ module.exports = {
         const visionResponse = `🌌 𝐆𝐞𝐦𝐢𝐧𝐢 𝐀𝐧𝐚𝐥𝐲𝐬𝐢𝐬\n━━━━━━━━━━━━━━━━━━\n${result}`;
         sendLongMessage(bot, visionResponse, authToken);
       } else {
-        // If no image, use GPT API
-        const apiUrl = `https://rest-api-french3.onrender.com/api/clarencev2`;
-        const response = await axios.get(apiUrl, {
-          params: {
-            prompt: finalPrompt,
-            uid: senderId
-          }
-        });
+        // If no image, use GPT API.  https://rest-api-bot.onrender.com/api/chatgpt?query=${encodeURIComponent(finalPrompt)}`;
+        const apiUrl = `https://rest-api-bot.onrender.com/api/chatgpt?query=${encodeURIComponent(finalPrompt)}`;
+        //https://rest-api-french3.onrender.com/api/clarencev2`;
+        const response = await axios.get(apiUrl, finalPrompt);
         const gptMessage = response.data.response;
 
         const gptResponse = `${gptMessage}`;
