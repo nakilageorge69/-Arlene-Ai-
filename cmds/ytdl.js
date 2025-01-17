@@ -5,7 +5,7 @@ console.log("sendMessage function:", sendMessage);
 
 module.exports = {
   name: "ytdl",
-  description: "YouTube downloader",
+  description: "YouTube downloader using URL",
   role: 1,
   author: "mark",
 
@@ -14,19 +14,19 @@ module.exports = {
 
     if (!prompt) {
       return sendMessage(senderId, {
-        text: `Usage: dl [ URL ]`
+        text: `Usage: ytdl [ URL ]`
       }, pageAccessToken);
     }
 
     try {
-      const apiUrl = `https://yt-video-production.up.railway.app/ytdlv3?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://yt-video-production.up.railway.app/ytdl?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
-      const { success, download_url } = response.data;
+      const { title, video } = response.data;
 
       console.log("Sending message with API URL:", apiUrl); 
       
       await sendMessage(senderId, {
-        text: ` response : ${description} \n`
+        text: ` title : ${title} \n`
       }, pageAccessToken);
       
  
@@ -34,7 +34,7 @@ module.exports = {
         attachment: {
           type: "video",
           payload: {
-            url: download_url
+            url: video
           }
         }
       }, pageAccessToken);
