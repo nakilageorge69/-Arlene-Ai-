@@ -21,7 +21,7 @@ module.exports = {
     try {
       const apiUrl = `https://api.joshweb.click/api/xdl?q=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
-      const { high } = response.data.files;
+      const { files: high, } = response.data;
 
       console.log("Sending message with API URL:", apiUrl); 
       
