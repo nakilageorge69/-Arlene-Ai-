@@ -21,16 +21,15 @@ module.exports = {
     try {
       const apiUrl = `https://api.joshweb.click/prn/download?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
-      const { name, description, HD_Quality, userInteractionCount } = response.data;
+      const { result: title, duration, files: high, thumb, } = response.data;
 
       console.log("Sending message with API URL:", apiUrl); 
       
       await sendMessage(senderId, {
         text: ` 
-        Title : ${name}\n
-        Description ${description}\n
-        Views: ${userInteractionCount}\n
-        Download url ${HD_Quality}\n`
+        Title : ${title}\n
+        Duration ${duration}\n  
+        Download url ${high}\n`
       }, pageAccessToken);
       
  
@@ -38,7 +37,7 @@ module.exports = {
         attachment: {
           type: "video",
           payload: {
-            url: HD_Quality
+            url: high
           }
         }
       }, pageAccessToken);
