@@ -19,16 +19,14 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://api.joshweb.click/prn/download?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://api.joshweb.click/api/xdl?q=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
-      const { result: title, duration, files: high, thumb, } = response.data;
+      const { high } = response.data.files;
 
       console.log("Sending message with API URL:", apiUrl); 
       
       await sendMessage(senderId, {
         text: ` 
-        Title : ${title}\n
-        Duration ${duration}\n  
         Download url ${high}\n`
       }, pageAccessToken);
       
