@@ -16,7 +16,7 @@ module.exports = {
     const commands = commandFiles.map((file) => {
       const command = require(path.join(commandsDir, file));
       return {
-        title: `✨ ${command.name.charAt(0).toUpperCase() + command.name.slice(1)}`,
+        title: `🎯 ${command.name.charAt(0).toUpperCase() + command.name.slice(1)}`,
         description: command.description,
         payload: `${command.name.toUpperCase()}_PAYLOAD`
       };
@@ -51,7 +51,7 @@ module.exports = {
 
     const quickReplies = commandsForPage.map((cmd) => ({
       content_type: "text",
-      title: cmd.title.replace('✨ ', ''),
+      title: cmd.title.replace('🎯 ', ''),
       payload: cmd.payload
     }));
 
