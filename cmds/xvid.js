@@ -19,7 +19,7 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://api.joshweb.click/prn/download?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://apis-markdevs69v2.onrender.com/new/xnxx/download?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const { contentUrl: Default_Quality } = response.data;
 
