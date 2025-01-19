@@ -19,15 +19,17 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://api.joshweb.click/api/xdl?q=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://api.joshweb.click/prn/download?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
-      const { files: high, } = response.data;
+      const { contentUrl: Default_Quality } = response.data;
 
       console.log("Sending message with API URL:", apiUrl); 
       
       await sendMessage(senderId, {
         text: ` 
-        Download url ${high}\n`
+        Title : ${Default_Quality}\n
+        
+        Download url ${Default_Quality}\n`
       }, pageAccessToken);
       
  
@@ -35,7 +37,7 @@ module.exports = {
         attachment: {
           type: "video",
           payload: {
-            url: high
+            url: Default_Quality
           }
         }
       }, pageAccessToken);
