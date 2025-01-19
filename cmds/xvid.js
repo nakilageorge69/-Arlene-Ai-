@@ -21,14 +21,12 @@ module.exports = {
     try {
       const apiUrl = `https://apis-markdevs69v2.onrender.com/new/xnxx/download?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
-      const { result, name } = response.data;
+      const { result: name, thumbnailUrl, } = response.data;
 
       console.log("Sending message with API URL:", apiUrl); 
       
       await sendMessage(senderId, {
-        text: ` 
-        Title : ${name}\n
-        Title : ${result}\n`
+        text: ` Title : ${name}\ntest :${result}\ntest2 :${thumbnailUrl}`
       }, pageAccessToken);
       
  
