@@ -2,7 +2,7 @@ const axios = require('axios');
 const { sendMessage } = require('../handles/message');
 
 module.exports = {
-  name: "shoti2",
+  name: "shoti",
   description: "Send a random shoti video",
   author: "mark",
   //yeyy working sya
@@ -13,7 +13,7 @@ module.exports = {
       const { url: url, name, description } = response.data;
 
       await sendMessage(senderId, {
-        text: `Username: ${name}\ndescription: ${description}\nCmdOwner: ${author}`
+        text: `Username: ${name}\ndescription: ${description}\nCmdOwner: Mark Martinez`
       }, pageAccessToken);
 
       await sendMessage(senderId, {
