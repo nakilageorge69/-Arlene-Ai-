@@ -3,7 +3,7 @@ const path = require('path');
 const { sendMessage } = require('../handles/message');
 
 module.exports = {
-  name: 'help',
+  name: 'cmds',
   description: 'Show available commands with descriptions',
   role: 1,
   author: 'kiana',
@@ -16,7 +16,7 @@ module.exports = {
     const commands = commandFiles.map((file) => {
       const command = require(path.join(commandsDir, file));
       return {
-        title: `⌬ ${command.name.charAt(0).toUpperCase() + command.name.slice(1)}`,
+        title: `| ⌬ ${command.name.charAt(0).toUpperCase() + command.name.slice(1)}`,
         description: command.description,
         payload: `${command.name.toUpperCase()}_PAYLOAD`
       };
@@ -32,7 +32,7 @@ module.exports = {
 
     // Display all commands if "help all" is provided
     if (args[0]?.toLowerCase() === 'all') {
-      const helpTextMessage = `╭── 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦 ───\n | [ Total Commands : ${totalCommands} ]\n |\n${commands.map((cmd, index) => ` | ${index + 1}. ${cmd.title}\n | ○ ${cmd.description}`).join(' |\n|\n ')}`;
+      const helpTextMessage = `╭── 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦 ───\n | [ Total Commands : ${totalCommands} ]\n |\n${commands.map((cmd, index) => ` | ${index + 1}. ${cmd.title}\n | ○ ${cmd.description}`).join(' |\n |\n╰─────────────')}`;
       return sendMessage(senderId, { text: helpTextMessage }, pageAccessToken);
     }
 
@@ -51,7 +51,7 @@ module.exports = {
 
     const quickReplies = commandsForPage.map((cmd) => ({
       content_type: "text",
-      title: cmd.title.replace(' | ⌬ ', ''),
+      title: cmd.title.replace('| ⌬ ', ''),
       payload: cmd.payload
     }));
 
