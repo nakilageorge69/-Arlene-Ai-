@@ -2,24 +2,25 @@ const axios = require('axios');
 const { sendMessage } = require('../handles/message');
 
 module.exports = {
-  name: "shoti",
-  description: "Send a random shoto video",
-  author: "Heru",
+  name: "shoti2",
+  description: "Send a random shoti video",
+  author: "mark",
+  //yeyy working sya
 
   async execute(senderId, args, pageAccessToken) {
     try {
-      const response = await axios.get('https://betadash-shoti-yazky.vercel.app/shotizxx?apikey=shipazu');
-      const { shotiurl: videoUrl, username, nickname, duration } = response.data;
+      const response = await axios.get('https://random-use-api-production.up.railway.app/shoti');
+      const { url: url, name, description } = response.data;
 
       await sendMessage(senderId, {
-        text: `🌸 Username: ${username}\n💟 Nickname: ${nickname}\n⏳ Duration: ${duration} seconds`
+        text: `Username: ${name}\ndescription: ${description}\nCmdOwner: ${author}`
       }, pageAccessToken);
 
       await sendMessage(senderId, {
         attachment: {
           type: "video",
           payload: {
-            url: videoUrl
+            url: url
           }
         }
       }, pageAccessToken);
