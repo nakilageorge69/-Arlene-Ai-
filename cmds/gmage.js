@@ -2,10 +2,10 @@ const axios = require('axios');
 const { sendMessage } = require('../handles/message');
 
 module.exports = {
-  name: 'gen',
+  name: 'gmage',
   description: 'Generate an image based on a prompt.',
   role: 1,
-  author: 'French Clarence Mangigo',
+  author: 'GeoDevz69',
   
   async execute(senderId, args, pageAccessToken) {
     if (!args || args.length === 0) {
@@ -16,7 +16,7 @@ module.exports = {
     }
 
     const prompt = args.join(' ');
-    const apiUrl = `https://new-rest-api2.onrender.com/api/art?prompt=${encodeURIComponent(prompt)}`;
+    const apiUrl = `https://zaikyoo.onrender.com /api/art1?prompt=${encodeURIComponent(prompt)}`;
 
     try {
       await sendMessage(senderId, {
