@@ -16,7 +16,7 @@ module.exports = {
     }
 
     const prompt = args.join(' ');
-    const apiUrl = `https://zaikyoo.onrender.com /api/art1?prompt=${encodeURIComponent(prompt)}`;
+    const apiUrl = `https://zaikyoo.onrender.com/api/art1?prompt=${encodeURIComponent(prompt)}`;
 
     try {
       await sendMessage(senderId, {
