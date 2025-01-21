@@ -32,7 +32,7 @@ module.exports = {
 
     // Display all commands if "help all" is provided
     if (args[0]?.toLowerCase() === 'all') {
-      const helpTextMessage = `╭── 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦 ────\n | [ Total Commands : ${totalCommands} ]\n | ${commands.map((cmd, index) =>`\n | ${index + 1}. ${cmd.title}\n | ○ ${cmd.description}`).join('')}\n |••[Owner: GeoDevz69]••\n╰─────────────`;
+      const helpTextMessage = `╭── 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦 ────⌬\n | [ Total Commands : ${totalCommands} ]\n | ${commands.map((cmd, index) =>\n | `${index + 1}. ${cmd.title}\n | ○ ${cmd.description}\n |`).join('')}\n | ••••[ Owner: GeoDevz69 ]••••\n╰────────────⌬`;
       return sendMessage(senderId, { text: helpTextMessage }, pageAccessToken);
     }
 
@@ -46,7 +46,7 @@ module.exports = {
       }, pageAccessToken);
     }
 
-    const helpTextMessage = `╭─── 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦 ───\n | [ Page View ${page}/${totalPages} ]\n | [ Total Commands : ${totalCommands} ]\n | ${commandsForPage.map((cmd, index) =>`\n | ${startIndex + index + 1}. ${cmd.title}\n | ○ ${cmd.description}`).join('')}\n | 🔕 Note : Use "help [page]" to switch pages, or "help all" to see all commands!\n╰─────────────`;
+    const helpTextMessage = `╭─── 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦 ──⌬\n | [ Page View ${page}/${totalPages} ]\n | [ Total Commands : ${totalCommands} ]\n |\n${commandsForPage.map((cmd, index) => `${startIndex + index + 1}. ${cmd.title}\n | ○ ${cmd.description}\n |`).join('')}\n\n | 🔕 Note : Use "help [page]" to switch pages, or "help all" to see all commands!\n╰────────────⌬`;
 
 
     const quickReplies = commandsForPage.map((cmd) => ({
@@ -62,3 +62,4 @@ module.exports = {
     }, pageAccessToken);
   }
 };
+    
