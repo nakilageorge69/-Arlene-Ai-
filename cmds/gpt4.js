@@ -25,9 +25,9 @@ function splitMessageIntoChunks(message, chunkSize) {
 }
 
 module.exports = {
-  name: 'gpt4',
+  name: 'gpt4o',
   description: 'Ask GPT-4 for a response to a given query',
-  usage: '-gpt4 <query>',
+  usage: '-gpt4o <query>',
   author: 'coffee',
   async execute(senderId, args, pageAccessToken) {
     if (!args || !Array.isArray(args) || args.length === 0) {
@@ -38,7 +38,7 @@ module.exports = {
     const query = args.join(' ');
 
     try {
-      const apiUrl = `https://markdevs-last-api-2epw.onrender.com/api/v2/gpt4?query=${encodeURIComponent(query)}`;
+      const apiUrl = `https://zaikyoo.onrender.com/api/gpt4o?prompt=hello&uid=123${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const gptResponse = response.data.respond;
 
