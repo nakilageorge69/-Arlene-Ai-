@@ -6,7 +6,7 @@ module.exports = {
   name: 'help',
   description: 'Show available commands with descriptions',
   role: 1,
-  author: 'kiana',
+  author: 'GeoDevz69',
   
   execute(senderId, args, pageAccessToken) {
     const commandsDir = path.join(__dirname, '../cmds');
@@ -32,10 +32,9 @@ module.exports = {
 
     // Display all commands if "help all" is provided
     if (args[0]?.toLowerCase() === 'all') {
-      const helpTextMessage = `╭── 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦 ────⌬\n | [ Total Commands : ${totalCommands} ]\n | ${commands.map((cmd, index) =>\n | `${index + 1}. ${cmd.title}\n | ○ ${cmd.description}\n |`).join('')}\n | ••••[ Owner: GeoDevz69 ]••••\n╰────────────⌬`;
+      const helpTextMessage = `╭── 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦 ────⌬\n | [ Total Commands : ${totalCommands} ]\n | ${commands.map((cmd, index) => ` \n | ${index + 1}. ${cmd.title}\n | ○ ${cmd.description}\n |`).join('')}\n | ••••[ Owner: GeoDevz69 ]••••\n╰────────────⌬`;
       return sendMessage(senderId, { text: helpTextMessage }, pageAccessToken);
     }
-
 
     const startIndex = (page - 1) * commandsPerPage;
     const commandsForPage = commands.slice(startIndex, startIndex + commandsPerPage);
@@ -62,4 +61,4 @@ module.exports = {
     }, pageAccessToken);
   }
 };
-    
+                        
