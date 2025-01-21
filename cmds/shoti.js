@@ -13,7 +13,7 @@ module.exports = {
       const { url: url, name, description } = response.data;
 
       await sendMessage(senderId, {
-        text: `🌸 Username: ${name}\n🗯️ Description: ${description}\n🧛 Owner: Mark and GeoDevz69`
+        text: `🌸 Username: ${name}\n🗯️ Description: ${description}\n🧛 Modder: GeoDevz69`
       }, pageAccessToken);
 
       await sendMessage(senderId, {
