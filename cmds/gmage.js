@@ -10,7 +10,7 @@ module.exports = {
   async execute(senderId, args, pageAccessToken) {
     if (!args || args.length === 0) {
       await sendMessage(senderId, {
-        text: 'Please provide a prompt.\n\nUsage:\nExample: gen cat'
+        text: 'Please provide a prompt.\n\nUsage:\nExample: gmage hotdogs'
       }, pageAccessToken);
       return;
     }
