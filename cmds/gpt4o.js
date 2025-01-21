@@ -38,7 +38,7 @@ module.exports = {
     const query = args.join(' ');
 
     try {
-      const apiUrl = `https://zaikyoo.onrender.com/api/gpt4o?prompt=hello&uid=123${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-4o?q=hi&uid=1${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const gptResponse = response.data.respond;
 
