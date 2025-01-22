@@ -36,7 +36,7 @@ module.exports = {
         sendLongMessage(bot, visionResponse, authToken);
       } else {
         // If no image, use GPT API.  https://rest-api-bot.onrender.com/api/chatgpt?query=${encodeURIComponent(finalPrompt)}`;
-        const apiUrl = `https://rest-api-bot-3wqb.onrender.com/api/gpt4?query=hi&query= ${encodeURIComponent(query)}`;
+        const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-3.5?q=${encodeURIComponent(query)}`;
         //https://rest-api-french3.onrender.com/api/clarencev2`;
         try {
   // Send the GET request
