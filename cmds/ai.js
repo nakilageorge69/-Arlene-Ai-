@@ -3,7 +3,7 @@ const { sendMessage } = require('../handles/message');
 
 module.exports = {
   name: "ai",
-  description: "Gpt4o x Gemini AI",
+  description: "Gpt3.5 x Gemini AI",
   role: 1,
   author: "Kiana",
 
@@ -36,19 +36,11 @@ module.exports = {
         sendLongMessage(bot, visionResponse, authToken);
       } else {
         // If no image, use GPT API.  https://rest-api-bot.onrender.com/api/chatgpt?query=${encodeURIComponent(finalPrompt)}`;
-        const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-3.5?q=${encodeURIComponent(query)}`;
+        const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-3.5?q=${encodeURIComponent(finalPrompt)}`;
         //https://rest-api-french3.onrender.com/api/clarencev2`;
-        try {
-  // Send the GET request
-  const response = await axios.get(apiUrl);
+        const response = await axios.get(apiUrl, finalPrompt);
+        const gptMessage = response.data.response;
 
-  // Assuming the response contains a 'response' field
-  const gptMessage = response.data.response;
-
-  console.log(gptMessage);
-} catch (error) {
-  console.error("Error fetching data:", error);
-}
         const gptResponse = `${gptMessage}`;
         sendLongMessage(bot, gptResponse, authToken);
       }
