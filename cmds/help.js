@@ -45,12 +45,12 @@ module.exports = {
       }, pageAccessToken);
     }
 
-    const helpTextMessage = `╭──❍「 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦 」\n │ [ Page View ${page}/${totalPages} ]\n │ [ Total Commands : ${totalCommands} ]\n | ${commandsForPage.map((cmd, index) => ` \n | ${startIndex + index + 1}. ${cmd.title}\n │ ○ ${cmd.description}\n │`).join('')}\n │\n │ 🔕 Note : Use "help [page]" to switch pages, or "help all" to see all commands!\n╰────────────☾⋆`;
+    const helpTextMessage = `╭──❍「 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦 」\n │ »  Page View : [ ${page}/${totalPages} ]\n │ » Total Commands : [ ${totalCommands} ]\n | ${commandsForPage.map((cmd, index) => ` \n | ${startIndex + index + 1}. ${cmd.title}\n │ ○ ${cmd.description}\n │`).join('')}╰────────────☾⋆\n\n\n ├─────☾⋆\n │ » Note : Use "help [page]" to switch pages, or "help all" to see all commands!\n╰────────────☾⋆`;
 
 
     const quickReplies = commandsForPage.map((cmd) => ({
       content_type: "text",
-      title: cmd.title.replace('| ⌬ ', ''),
+      title: cmd.title.replace('│ ⌬ ', ''),
       payload: cmd.payload
     }));
 
