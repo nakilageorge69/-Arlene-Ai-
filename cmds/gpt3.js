@@ -23,14 +23,14 @@ module.exports = {
       const reply = response.data.reply;
 
       if (reply) {
-        const formattedResponse = `🌟 𝗚𝗣𝗧-𝟯.𝟱 𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲:\n\n${reply}`;
+        const formattedResponse = `🌟 𝗚𝗣𝗧-𝟯.𝟓 𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲:\n\n${reply}`;
         await sendMessage(senderId, { text: formattedResponse }, pageAccessToken);
       } else {
         await sendMessage(senderId, { text: 'Sorry, there was an error processing your request.' }, pageAccessToken);
       }
     } catch (error) {
       console.error('Error calling GPT-3.5 Turbo API:', error);
-      await sendMessage(senderId, { text: 'Sorry, there was an error processing your request.' }, pageAccessToken);
+      await sendMessage(senderId, { text: 'Sorry, there was an error processing your request.' }, pageAccessToken); // Fixed line
     }
   }
 };
