@@ -12,11 +12,11 @@ module.exports = {
 
     if (!prompt) {
       return sendMessage(senderId, {
-        text: 'Hello I am Neko, how can I help you?'
+        text: 'Hello I am Arlene, how can I help you?'
       }, pageAccessToken);
     }
 
-    const apiUrl = `https://openai-rest-api.vercel.app/hercai?ask=${encodeURIComponent(prompt)}&model=turbo`;
+    const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-3.5?q=${encodeURIComponent(prompt)}`;
 
     try {
       const response = await axios.get(apiUrl);
