@@ -38,7 +38,7 @@ module.exports = {
     const query = args.join(' ');
 
     try {
-      const apiUrl = `https://markdevs-last-api-2epw.onrender.com/api/v2/gpt4?query=${encodeURIComponent(query)}`;
+      const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-4o?q=${encodeURIComponent(query)}&uid=1`;
       const response = await axios.get(apiUrl);
       const gptResponse = response.data.respond;
 
