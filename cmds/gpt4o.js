@@ -25,9 +25,9 @@ function splitMessageIntoChunks(message, chunkSize) {
 }
 
 module.exports = {
-  name: 'gpt4o',
+  name: 'gpt4',
   description: 'Ask GPT-4 for a response to a given query',
-  usage: '-gpt4o <query>',
+  usage: '-gpt4 <query>',
   author: 'coffee',
   async execute(senderId, args, pageAccessToken) {
     if (!args || !Array.isArray(args) || args.length === 0) {
@@ -38,7 +38,7 @@ module.exports = {
     const query = args.join(' ');
 
     try {
-      const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-4o?q=hi&uid=1${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-4o?q=${encodeURIComponent(query)}&uid=1`;
       const response = await axios.get(apiUrl);
       const gptResponse = response.data.respond;
 
@@ -51,3 +51,4 @@ module.exports = {
     }
   }
 };
+        
