@@ -19,10 +19,10 @@ module.exports = {
 
     try {
       const response = await axios.get(apiUrl);
-      const { response: apiResponse } = response.data;
-
-      if (apiResponse) { 
-        const formattedResponse = `🤖 𝗠𝗜𝗫𝗧𝗥𝗔𝗟 𝗔𝗜\n\n${apiResponse}`;
+      const urlresponse = response.data.content;
+      
+      if (urlresponse) { 
+        const formattedResponse = `🤖 𝗠𝗜𝗫𝗧𝗥𝗔𝗟 𝗔𝗜\n\n${urlresponse}`;
         await sendResponseInChunks(senderId, formattedResponse, pageAccessToken);
       } else {
         await sendMessage(senderId, { text: 'Sorry, there was an error processing your request.' }, pageAccessToken);
