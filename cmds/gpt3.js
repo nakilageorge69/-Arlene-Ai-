@@ -2,35 +2,61 @@ const axios = require('axios');
 const { sendMessage } = require('../handles/message');
 
 module.exports = {
-  name: 'gpt3',
-  description: 'Ask a question to the GPT-3.5 Turbo',
+  name: 'blackbox',
+  description: 'Ask a question to the Blackbox AI',
   role: 1,
-  author: 'Kiana',
+  author: 'Mark Martinez',
 
   async execute(senderId, args, pageAccessToken) {
     const prompt = args.join(' ').trim();
 
+    
     if (!prompt) {
       return sendMessage(senderId, {
-        text: 'Hello I am Arlene, how can I help you?'
+        text: 'Hello! I am Blackbox Ai, how can I help you?'
       }, pageAccessToken);
     }
 
-    const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-3.5?q=${encodeURIComponent(prompt)}`;
+    const apiUrl = `https://kaiz-apis.gleeze.com/api/blackbox?q=${encodeURIComponent(prompt)}&uid=12`;
 
     try {
       const response = await axios.get(apiUrl);
-      const reply = response.data.reply;
+      const reply = response.data.response;
 
       if (reply) {
-        const formattedResponse = `🌟 𝗚𝗣𝗧-𝟯.𝟓 𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲:\n\n${reply}`;
-        await sendMessage(senderId, { text: formattedResponse }, pageAccessToken);
+        
+        const formattedResponse = `💻📦 𝗕𝗹𝗮𝗰𝗸𝗯𝗼𝘅 𝗔𝗜 𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲:\n\n${reply}`;
+        
+        
+        const maxLength = 2000;
+
+        
+        if (formattedResponse.length > maxLength) {
+          const chunks = [];
+          let remainingText = formattedResponse;
+
+          while (remainingText.length > 0) {
+            chunks.push(remainingText.substring(0, maxLength));
+            remainingText = remainingText.substring(maxLength);
+          }
+
+          
+          for (const chunk of chunks) {
+            await sendMessage(senderId, { text: chunk }, pageAccessToken);
+          }
+        } else {
+          
+          await sendMessage(senderId, { text: formattedResponse }, pageAccessToken);
+        }
       } else {
+        
         await sendMessage(senderId, { text: 'Sorry, there was an error processing your request.' }, pageAccessToken);
       }
     } catch (error) {
-      console.error('Error calling GPT-3.5 Turbo API:', error);
-      await sendMessage(senderId, { text: 'Sorry, there was an error processing your request.' }, pageAccessToken); // Fixed line
+      console.error('Error calling Blackbox API:', error);
+
+      
+      await sendMessage(senderId, { text: 'Sorry, there was an error processing your request.' }, pageAccessToken);
     }
   }
 };
