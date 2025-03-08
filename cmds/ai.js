@@ -4,7 +4,7 @@ const { sendMessage } = require('../handles/message');
 module.exports = {
   name: "ai",
   description: "Ai Pro + Gemini Pro",
-  role: 0,
+  role: 1,
   author: "Mark Martinez",
 
   async execute(bot, args, authToken, event) {
