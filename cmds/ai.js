@@ -3,7 +3,7 @@ const { sendMessage } = require('../handles/message');
 
 module.exports = {
   name: "ai",
-  description: "Gpt3.5 x Gemini AI",
+  description: "Gpt3.5 x Gemini 1.5 AI",
   role: 1,
   author: "Kiana",
 
@@ -28,18 +28,18 @@ module.exports = {
 
       if (imageUrl) {
         // If an image is detected, use Gemini Vision API
-        const apiUrl = `https://kaiz-apis.gleeze.com/api/gemini-vision`;
+        const apiUrl = `https://testapi2-919t.onrender.com/gemini?ask=`;
         const response = await handleImageRecognition(apiUrl, finalPrompt, imageUrl, senderId);
-        const result = response.response;
+        const result = response.description;
 
         const visionResponse = `🌌 𝐆𝐞𝐦𝐢𝐧𝐢 𝐀𝐧𝐚𝐥𝐲𝐬𝐢𝐬\n━━━━━━━━━━━━━━━━━━\n${result}`;
         sendLongMessage(bot, visionResponse, authToken);
       } else {
         // If no image, use GPT API.  https://rest-api-bot.onrender.com/api/chatgpt?query=${encodeURIComponent(finalPrompt)}`;
-        const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-3.5?q=${encodeURIComponent(finalPrompt)}`;
+        const apiUrl = `https://testapi2-919t.onrender.com/gemini?ask=${encodeURIComponent(finalPrompt)}`;
         //https://rest-api-french3.onrender.com/api/clarencev2`;
         const response = await axios.get(apiUrl, finalPrompt);
-        const gptMessage = response.data.response;
+        const gptMessage = response.data.description;
 
         const gptResponse = `${gptMessage}`;
         sendLongMessage(bot, gptResponse, authToken);
