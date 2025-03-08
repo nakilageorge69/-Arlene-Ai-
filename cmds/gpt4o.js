@@ -38,9 +38,9 @@ module.exports = {
     const query = args.join(' ');
 
     try {
-      const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-4o?q=${encodeURIComponent(query)}&uid=1`;
+      const apiUrl = `https://testapi2-919t.onrender.com/gemini?ask=${encodeURIComponent(query)}`;
       const response = await axios.get(apiUrl);
-      const gptResponse = response.data.respond;
+      const gptResponse = response.data.description;
 
       
       sendLongMessage(senderId, gptResponse, pageAccessToken, sendMessage);
