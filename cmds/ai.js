@@ -3,9 +3,9 @@ const { sendMessage } = require('../handles/message');
 
 module.exports = {
   name: "ai",
-  description: "Gpt3.5 x Gemini 1.5 AI",
-  role: 1,
-  author: "Kiana",
+  description: "Ai Pro + Gemini Pro",
+  role: 0,
+  author: "Mark Martinez",
 
   async execute(bot, args, authToken, event) {
     if (!event?.sender?.id) {
@@ -32,7 +32,7 @@ module.exports = {
         const response = await handleImageRecognition(apiUrl, finalPrompt, imageUrl);
         const result = response.description;
 
-        const visionResponse = `🌌 𝐆𝐞𝐦𝐢𝐧𝐢 𝐀𝐧𝐚𝐥𝐲𝐬𝐢𝐬\n━━━━━━━━━━━━━━━━━━\n${result}`;
+        const visionResponse = `[ GEMINI 2.0 ]\n\n${result}`;
         sendLongMessage(bot, visionResponse, authToken);
       } else {
         // If no image, use GPT API.  https://rest-api-bot.onrender.com/api/chatgpt?query=${encodeURIComponent(finalPrompt)}`;
@@ -40,6 +40,11 @@ module.exports = {
         //https://rest-api-french3.onrender.com/api/clarencev2`;
         const response = await axios.get(apiUrl, finalPrompt);
         const gptMessage = response.data.description;
+        
+   //   const apiUrl = `https://simpleapi-seven.vercel.app/gemini-2.0pro`;
+    //    const response = await handleImageRecognition(apiUrl, finalPrompt, imageUrl);
+      //  const gptMessage = response.data.description;
+
 
         const gptResponse = `${gptMessage}`;
         sendLongMessage(bot, gptResponse, authToken);
@@ -51,13 +56,12 @@ module.exports = {
   }
 };
 
-async function handleImageRecognition(apiUrl, prompt, imageUrl, senderId) {
+async function handleImageRecognition(apiUrl, prompt, imageUrl) {
   try {
     const { data } = await axios.get(apiUrl, {
       params: {
-        q: prompt,
-        uid: senderId,
-        imageUrl: imageUrl || ""
+        ask: prompt,
+        imagurl: imageUrl || ""
       }
     });
     return data;
