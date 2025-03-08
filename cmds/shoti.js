@@ -9,7 +9,7 @@ module.exports = {
 
   async execute(senderId, args, pageAccessToken) {
     try {
-      const response = await axios.get('https://random-use-api-production.up.railway.app/shoti');
+      const response = await axios.get('https://testapi2-919t.onrender.com/shoti');
       const { url: url, name, description } = response.data;
 
       await sendMessage(senderId, {
