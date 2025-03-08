@@ -28,15 +28,15 @@ module.exports = {
 
       if (imageUrl) {
         // If an image is detected, use Gemini Vision API
-        const apiUrl = `https://testapi2-919t.onrender.com/gemini?ask=`;
-        const response = await handleImageRecognition(apiUrl, finalPrompt, imageUrl, senderId);
+        const apiUrl = `https://testapi2-919t.onrender.com/gemini-2.0pro`;
+        const response = await handleImageRecognition(apiUrl, finalPrompt, imageUrl);
         const result = response.description;
 
         const visionResponse = `🌌 𝐆𝐞𝐦𝐢𝐧𝐢 𝐀𝐧𝐚𝐥𝐲𝐬𝐢𝐬\n━━━━━━━━━━━━━━━━━━\n${result}`;
         sendLongMessage(bot, visionResponse, authToken);
       } else {
         // If no image, use GPT API.  https://rest-api-bot.onrender.com/api/chatgpt?query=${encodeURIComponent(finalPrompt)}`;
-        const apiUrl = `https://testapi2-919t.onrender.com/gemini?ask=${encodeURIComponent(finalPrompt)}`;
+        const apiUrl = `https://testapi2-919t.onrender.com/gemini-2.0pro?ask=${encodeURIComponent(finalPrompt)}`;
         //https://rest-api-french3.onrender.com/api/clarencev2`;
         const response = await axios.get(apiUrl, finalPrompt);
         const gptMessage = response.data.description;
