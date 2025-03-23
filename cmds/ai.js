@@ -28,7 +28,7 @@ module.exports = {
 
       if (imageUrl) {
         // If an image is detected, use Gemini Vision API
-        const apiUrl = `https://testapi2-919t.onrender.com/gemini-2.0pro`;
+        const apiUrl = `https://apis-rho-nine.vercel.app/gemini`;
         const response = await handleImageRecognition(apiUrl, finalPrompt, imageUrl);
         const result = response.description;
 
@@ -36,7 +36,7 @@ module.exports = {
         sendLongMessage(bot, visionResponse, authToken);
       } else {
         // If no image, use GPT API.  https://rest-api-bot.onrender.com/api/chatgpt?query=${encodeURIComponent(finalPrompt)}`;
-        const apiUrl = `https://testapi2-919t.onrender.com/gemini-2.0pro?ask=${encodeURIComponent(finalPrompt)}`;
+        const apiUrl = `https://apis-rho-nine.vercel.app/gemini?ask=${encodeURIComponent(finalPrompt)}`;
         //https://rest-api-french3.onrender.com/api/clarencev2`;
         const response = await axios.get(apiUrl, finalPrompt);
         const gptMessage = response.data.description;
