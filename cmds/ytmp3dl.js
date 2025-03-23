@@ -19,7 +19,7 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://yt-video-production.up.railway.app/ytdl?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://apis-rho-nine.vercel.app/ytsdlmp3?q=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const { title, audio } = response.data;
 
