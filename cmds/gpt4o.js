@@ -38,7 +38,7 @@ module.exports = {
     const query = args.join(' ');
 
     try {
-      const apiUrl = `https://testapi2-919t.onrender.com/gemini?ask=${encodeURIComponent(query)}`;
+      const apiUrl = `https://apis-rho-nine.vercel.app/gemini?ask=${encodeURIComponent(query)}`;
       const response = await axios.get(apiUrl);
       const gptResponse = response.data.description;
 
