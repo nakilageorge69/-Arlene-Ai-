@@ -5,7 +5,7 @@ module.exports = {
   name: 'blackbox',
   description: 'Ask a question to the Blackbox AI',
   role: 1,
-  author: 'Mark Martinez',
+  author: 'Mark Martinez and GeoDevz69',
 
   async execute(senderId, args, pageAccessToken) {
     const prompt = args.join(' ').trim();
@@ -17,7 +17,7 @@ module.exports = {
       }, pageAccessToken);
     }
 
-    const apiUrl = `https://kaiz-apis.gleeze.com/api/blackbox?q=${encodeURIComponent(prompt)}&uid=12`;
+    const apiUrl = `https://hiroshi-api.onrender.com/ai/cohere?ask=${encodeURIComponent(prompt)}&uid=12`;
 
     try {
       const response = await axios.get(apiUrl);
