@@ -38,9 +38,9 @@ module.exports = {
     const query = args.join(' ');
 
     try {
-      const apiUrl = `https://apis-rho-nine.vercel.app/gemini?ask=${encodeURIComponent(query)}`;
+      const apiUrl = `https://api.zetsu.xyz/api/chatgpt-4o-latest?uid=100076235372369&prompt=hi${encodeURIComponent(query)}`;
       const response = await axios.get(apiUrl);
-      const gptResponse = response.data.description;
+      const gptResponse = response.data.response;
 
       
       sendLongMessage(senderId, gptResponse, pageAccessToken, sendMessage);
