@@ -10,7 +10,7 @@ module.exports = {
   async execute(senderId, args, pageAccessToken) {
     const query = args.join(' ');
     try {
-      const apiUrl = `https://markdevs-last-api-2epw.onrender.com/search/chords?q=${encodeURIComponent(query)}`;
+      const apiUrl = `https://api.zetsu.xyz/search/chords?q=${encodeURIComponent(query)}`;
       const response = await axios.get(apiUrl);
       const result = response.data.chord;
 
