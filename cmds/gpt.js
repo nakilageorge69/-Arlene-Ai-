@@ -2,7 +2,7 @@ const axios = require('axios');
 const { sendMessage } = require('../handles/message');
 
 module.exports = {
-  name: 'blackbox',
+  name: 'gpt',
   description: 'Ask a question to the Blackbox AI',
   role: 1,
   author: 'Mark Martinez and GeoDevz69',
@@ -13,7 +13,7 @@ module.exports = {
     
     if (!prompt) {
       return sendMessage(senderId, {
-        text: 'Hello! I am Blackbox Ai, how can I help you?'
+        text: 'Hello! I am Mixtral Ai, how can I help you?'
       }, pageAccessToken);
     }
      //api
@@ -23,7 +23,7 @@ module.exports = {
     //const apiUrl = `https://clarence-rest-apiv1.onrender.com/api/blackbox?message=${encodeURIComponent(prompt)}`;
     
     //after
-     const apiUrl = `https://kaiz-apis.gleeze.com/api/blackbox?q=${encodeURIComponent(prompt)}&uid=12`;
+     const apiUrl = `https://kaiz-apis.gleeze.com/api/codestral-latest?q=&uid=${encodeURIComponent(prompt)}`;
      
      //tignan mo yung pinag kaiba ng before and after tas pag may uid sa dulo i dudugtong molang din yon katulad ng after 
      
@@ -42,7 +42,7 @@ module.exports = {
 
       if (reply) {
         
-        const formattedResponse = `💻📦 𝗕𝗹𝗮𝗰𝗸𝗯𝗼𝘅 𝗔𝗜 𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲:\n\n${reply}`;
+        const formattedResponse = `GPT-PRO AI:\n\n${reply}`;
         
         
         const maxLength = 2000;
