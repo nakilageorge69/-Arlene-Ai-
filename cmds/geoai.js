@@ -17,7 +17,7 @@ module.exports = {
       }, pageAccessToken);
     }
 
-    const apiUrl = `https://api.zetsu.xyz/api/gpt-4o-mini-2024-07-18?uid=&prompt=${encodeURIComponent(prompt)}`;
+    const apiUrl = `https://api.zetsu.xyz/api/gpt-4o-mini-2024-07-18?uid=1&prompt=hi${encodeURIComponent(prompt)}`;
 
     try {
       const response = await axios.get(apiUrl);
@@ -25,7 +25,7 @@ module.exports = {
 
       if (reply) {
         
-        const formattedResponse = `💻📦 𝗕𝗹𝗮𝗰𝗸𝗯𝗼𝘅 𝗔𝗜 𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲:\n\n${reply}`;
+        const formattedResponse = `GPT4-PRO AI:\n\n${reply}`;
         
         
         const maxLength = 2000;
