@@ -2,7 +2,7 @@ const axios = require('axios');
 const { sendMessage } = require('../handles/message'); // Adjust the path as necessary
 
 module.exports = {
-  name: 'detect',
+  name: 'aidetect',
   description: 'Detect if a text was written by an AI or a human',
   author: 'Clarence',
   role: 1,
