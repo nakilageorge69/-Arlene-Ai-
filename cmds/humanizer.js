@@ -2,7 +2,7 @@ const axios = require('axios');
 const { sendMessage } = require('../handles/message');
 
 module.exports = {
-  name: 'humanize',
+  name: 'humanizer',
   description: 'humanize your AI written works',
   author: 'Clarence',
   role: 1,
