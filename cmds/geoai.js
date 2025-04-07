@@ -13,11 +13,11 @@ module.exports = {
     
     if (!prompt) {
       return sendMessage(senderId, {
-        text: 'Hello! I am Blackbox Ai, how can I help you?'
+        text: 'Hello! I am GPT4 Ai, how can I help you?'
       }, pageAccessToken);
     }
 
-    const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-4o-pro?ask=${encodeURIComponent(prompt)}`;
+    const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-4o-pro?ask=&uid=&imageUrl=${encodeURIComponent(prompt)}`;
 
     try {
       const response = await axios.get(apiUrl);
