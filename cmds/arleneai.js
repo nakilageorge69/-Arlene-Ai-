@@ -28,7 +28,7 @@ module.exports = {
 
       if (imageUrl) {
         // If an image is detected, use Gemini Vision API
-        const apiUrl = `https://apis-rho-nine.vercel.app/gemini`;
+        const apiUrl = `https://kaiz-apis.gleeze.com/api/gemini-vision?`;
         const response = await handleImageRecognition(apiUrl, finalPrompt, imageUrl);
         const result = response.description;
 
@@ -36,10 +36,10 @@ module.exports = {
         sendLongMessage(bot, visionResponse, authToken);
       } else {
         // If no image, use GPT API.  https://rest-api-bot.onrender.com/api/chatgpt?query=${encodeURIComponent(finalPrompt)}`;
-        const apiUrl = `https://apis-rho-nine.vercel.app/gemini?ask=${encodeURIComponent(finalPrompt)}`;
+        const apiUrl = `https://kaiz-apis.gleeze.com/api/github-copilot?ask=&uid=${encodeURIComponent(finalPrompt)}`;
         //https://rest-api-french3.onrender.com/api/clarencev2`;
         const response = await axios.get(apiUrl, finalPrompt);
-        const gptMessage = response.data.description;
+        const gptMessage = response.data.response;
         
    //   const apiUrl = `https://simpleapi-seven.vercel.app/gemini-2.0pro`;
     //    const response = await handleImageRecognition(apiUrl, finalPrompt, imageUrl);
