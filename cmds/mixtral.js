@@ -14,12 +14,12 @@ module.exports = {
       return sendMessage(senderId, { text: 'Hello I\'m Mixtral AI, how can I assist you today?' }, pageAccessToken);
     }
 
-    const apiUrl = `https://apis-rho-nine.vercel.app/mistral?message=${encodeURIComponent(query)}&uid=1`;
+    const apiUrl = `https://kaiz-apis.gleeze.com/api/mixtral-8x22b?q=${encodeURIComponent(query)}&uid=1`;
 
 
     try {
       const response = await axios.get(apiUrl);
-      const urlresponse = response.data.response;
+      const urlresponse = response.data.content;
       
       if (urlresponse) { 
         const formattedResponse = `🤖 𝗠𝗜𝗫𝗧𝗥𝗔𝗟 𝗔𝗜\n\n${urlresponse}`;
