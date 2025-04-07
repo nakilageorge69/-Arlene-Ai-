@@ -17,7 +17,7 @@ module.exports = {
       }, pageAccessToken);
     }
 
-    const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-4o-pro?ask=&uid=&imageUrl=${encodeURIComponent(prompt)}`;
+    const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-4o-pro?ask=${encodeURIComponent(prompt)}&uid=1&imageUrl=`;
 
     try {
       const response = await axios.get(apiUrl);
