@@ -16,7 +16,7 @@ module.exports = {
     }
 
     const prompt = args.join(' ');
-    const apiUrl = `https://zaikyoo.onrender.com/api/artv1?p=${encodeURIComponent(prompt)}`;
+    const apiUrl = `https://kaiz-apis.gleeze.com/api/poli?prompt=${encodeURIComponent(prompt)}`;
     
 
     try {
