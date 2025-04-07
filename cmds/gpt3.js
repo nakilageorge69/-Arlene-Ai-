@@ -3,7 +3,7 @@ const { sendMessage } = require('../handles/message');
 
 module.exports = {
   name: 'gpt3',
-  description: 'Ask a question to the Blackbox AI',
+  description: 'Ask a question to the GPT-3 PRO AI',
   role: 1,
   author: 'Mark Martinez and GeoDevz69',
 
@@ -13,11 +13,11 @@ module.exports = {
     
     if (!prompt) {
       return sendMessage(senderId, {
-        text: 'Hello! I am Blackbox Ai, how can I help you?'
+        text: 'Hello! I am GPT-3 PRO, how can I help you?'
       }, pageAccessToken);
     }
 
-    const apiUrl = `https://api.zetsu.xyz/api/gpt-3.5-turbo?uid=&prompt= ${encodeURIComponent(prompt)}`;
+    const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-3.5?q=${encodeURIComponent(prompt)}`;
 
     try {
       const response = await axios.get(apiUrl);
