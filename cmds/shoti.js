@@ -9,7 +9,7 @@ module.exports = {
 
   async execute(senderId, args, pageAccessToken) {
     try {
-      const response = await axios.get('https://testapi2-919t.onrender.com/shoti');
+      const response = await axios.get('https://kaiz-apis.gleeze.com/api/shoti');
       const { url: url, name, description } = response.data;
 
       await sendMessage(senderId, {
