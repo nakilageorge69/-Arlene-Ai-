@@ -17,7 +17,7 @@ module.exports = {
       }, pageAccessToken);
     }
 
-    const apiUrl = `https://api.zetsu.xyz/api/gpt-3.5-turbo?prompt=${encodeURIComponent(prompt)}&uid=1`;
+    const apiUrl = `https://api.zetsu.xyz/api/gpt-3.5-turbo?uid=&prompt= ${encodeURIComponent(prompt)}`;
 
     try {
       const response = await axios.get(apiUrl);
