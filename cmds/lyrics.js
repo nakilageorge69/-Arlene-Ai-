@@ -12,7 +12,7 @@ module.exports = {
     try {
       const apiUrl = `https://api.zetsu.xyz/search/lyrics?q=${encodeURIComponent(query)}`;
       const response = await axios.get(apiUrl);
-      const result = response.data.result; 
+      const result = response.data.lyrics; 
 
       if (result && result.lyrics) {
         const lyricsMessage = `Title: ${result.title}\nArtist: ${result.artist}\n\n${result.lyrics}`;
