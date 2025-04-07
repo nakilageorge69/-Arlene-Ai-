@@ -25,7 +25,7 @@ function splitMessageIntoChunks(message, chunkSize) {
 }
 
 module.exports = {
-  name: 'gpt4',
+  name: 'gpt4o',
   description: 'Ask GPT-4 for a response to a given query',
   usage: '-gpt4 <query>',
   author: 'coffee',
