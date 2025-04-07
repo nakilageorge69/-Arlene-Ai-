@@ -9,7 +9,7 @@ module.exports = {
   async execute(senderId, args, pageAccessToken) {
     const prompt = args.join(' ');
     try {
-      const apiUrl = `https://kaiz-apis.gleeze.com/api/aidetector-v2?q=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://kaiz-apis.gleeze.com/api/aidetector?q=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const { ai, human, message } = response.data;
 
