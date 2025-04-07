@@ -2,7 +2,7 @@ const axios = require('axios');
 const { sendMessage } = require('../handles/message');
 
 module.exports = {
-  name: 'blackbox',
+  name: 'gpt3',
   description: 'Ask a question to the Blackbox AI',
   role: 1,
   author: 'Mark Martinez and GeoDevz69',
@@ -17,7 +17,7 @@ module.exports = {
       }, pageAccessToken);
     }
 
-    const apiUrl = `https://hiroshi-api.onrender.com/ai/cohere?ask=${encodeURIComponent(prompt)}&uid=12`;
+    const apiUrl = `https://api.zetsu.xyz/api/gpt-3.5-turbo?uid=&prompt=${encodeURIComponent(prompt)}`;
 
     try {
       const response = await axios.get(apiUrl);
