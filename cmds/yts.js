@@ -19,9 +19,9 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://dlvc.vercel.app/yt-audio?search=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://kaiz-apis.gleeze.com/api/ytsearch?q=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
-      const { title, downloadUrl } = response.data;
+      const { title, downloadUrl } = response.data.items;
 
       console.log("Sending message with API URL:", apiUrl); 
       
