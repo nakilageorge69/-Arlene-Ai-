@@ -38,7 +38,7 @@ module.exports = {
 
     try {
       const response = await axios.get(apiUrl);
-      const reply = response.data.response;
+      const reply = response.data.content;
 
       if (reply) {
         
