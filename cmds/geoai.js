@@ -17,7 +17,7 @@ module.exports = {
       }, pageAccessToken);
     }
 
-    const apiUrl = `https://api.zetsu.xyz/api/gpt-4o-mini-2024-07-18?uid=1&prompt=hi${encodeURIComponent(prompt)}`;
+    const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-4o-pro?ask=${encodeURIComponent(prompt)}`;
 
     try {
       const response = await axios.get(apiUrl);
