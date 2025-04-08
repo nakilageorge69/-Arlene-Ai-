@@ -7,7 +7,7 @@ module.exports = {
   name: "tikdl",
   description: "TikTok Video Downloader",
   role: 1,
-  author: "mark",
+  author: "Mark and GeoDevz69",
 
   async execute(senderId, args, pageAccessToken) {
     const prompt = args.join(" ");
@@ -19,7 +19,7 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://downloader-api-1.onrender.com/api/getinfo?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://zen-api.up.railway.app/api/tikdl?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const { url, description } = response.data;
 
