@@ -4,7 +4,7 @@ const { sendMessage } = require("../handles/message");
 console.log("sendMessage function:", sendMessage); 
 
 module.exports = {
-  name: "yts",
+  name: "music",
   description: "YouTube mp3 search",
   role: 1,
   author: "mark",
