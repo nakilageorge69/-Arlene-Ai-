@@ -5,7 +5,7 @@ console.log("sendMessage function:", sendMessage);
 
 module.exports = {
   name: "xxnndl",
-  description: "xvideos downloader",
+  description: "xxnn downloader",
   role: 1,
   author: "GeoDevz69",
 
