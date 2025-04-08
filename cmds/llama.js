@@ -19,7 +19,7 @@ module.exports = {
 
     try {
       const response = await axios.get(apiUrl);
-      const urlresponse = response.data.content;
+      const urlresponse = response.data.response;
       
       if (urlresponse) { 
         const formattedResponse = `🤖 LLAMA 3.0\n\n${urlresponse}`;
