@@ -2,8 +2,8 @@ const axios = require('axios');
 const { sendMessage } = require('../handles/message');
 
 module.exports = {
-  name: 'geoai',
-  description: 'Ask a question to the GPT-4 PRO',
+  name: 'deepseek',
+  description: 'Ask a question to the DeepSeek Ai',
   role: 1,
   author: 'Mark Martinez and GeoDevz69',
 
@@ -13,11 +13,11 @@ module.exports = {
     
     if (!prompt) {
       return sendMessage(senderId, {
-        text: 'Hello! I am GPT4 PRO, how can I help you?'
+        text: 'Hello! I am DeepSeek Ai, how can I help you?'
       }, pageAccessToken);
     }
 
-    const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-4o-pro?ask=${encodeURIComponent(prompt)}&uid=1`;
+    const apiUrl = `https://zen-api.up.railway.app/api/deepseek?query=${encodeURIComponent(prompt)}`;
 
     try {
       const response = await axios.get(apiUrl);
@@ -25,7 +25,7 @@ module.exports = {
 
       if (reply) {
         
-        const formattedResponse = `GPT4-PRO AI:\n\n${reply}`;
+        const formattedResponse = `DeepSeek Ai:\n\n${reply}`;
         
         
         const maxLength = 2000;
