@@ -12,14 +12,14 @@ module.exports = {
 
     if (!profileUrl) {
       await sendMessage(senderId, {
-        text: `Usage: findid [Facebook profile URL]`
+        text: `Usage: getid [Facebook profile URL]`
       }, pageAccessToken);
       return;
     }
 
     try {
    
-      const res = await axios.get(`https://api.joshweb.click/api/findid`, {
+      const res = await axios.get(`https://kaiz-apis.gleeze.com/api/fbuid?url=`, {
         params: { url: profileUrl }
       });
 
