@@ -2,7 +2,7 @@ const axios = require('axios');
 const { sendMessage } = require('../handles/message');
 
 module.exports = {
-  name: 'metaai',
+  name: 'meta',
   description: 'Ask a question to the GPT-3 PRO',
   role: 1,
   author: 'Mark Martinez and GeoDevz69',
@@ -21,7 +21,7 @@ module.exports = {
 
     try {
       const response = await axios.get(apiUrl);
-      const reply = response.data.response;
+      const reply = response.data;
 
       if (reply) {
         
