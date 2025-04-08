@@ -13,7 +13,7 @@ module.exports = {
     
     if (!prompt) {
       return sendMessage(senderId, {
-        text: 'Hello! I am Mixtral Ai, how can I help you?'
+        text: 'Hello! I am GPT-4, how can I help you?'
       }, pageAccessToken);
     }
      //api
@@ -42,7 +42,7 @@ module.exports = {
 
       if (reply) {
         
-        const formattedResponse = `GPT-PRO AI:\n\n${reply}`;
+        const formattedResponse = `GPT-4:\n\n${reply}`;
         
         
         const maxLength = 2000;
