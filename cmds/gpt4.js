@@ -23,7 +23,7 @@ module.exports = {
     //const apiUrl = `https://clarence-rest-apiv1.onrender.com/api/blackbox?message=${encodeURIComponent(prompt)}`;
     
     //after
-     const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-4o-pro?ask=${encodeURIComponent(prompt)}&uid=1&imageUrl=`;
+     const apiUrl = `https://zen-api.up.railway.app/api/chatgpt4?prompt=${encodeURIComponent(prompt)}`;
      
      //tignan mo yung pinag kaiba ng before and after tas pag may uid sa dulo i dudugtong molang din yon katulad ng after 
      
