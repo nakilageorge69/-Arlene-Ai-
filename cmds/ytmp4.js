@@ -4,7 +4,7 @@ const { sendMessage } = require("../handles/message");
 console.log("sendMessage function:", sendMessage); 
 
 module.exports = {
-  name: "ytmp3",
+  name: "ytmp4",
   description: "YouTube downloader using URL",
   role: 1,
   author: "mark",
