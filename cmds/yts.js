@@ -5,23 +5,23 @@ console.log("sendMessage function:", sendMessage);
 
 module.exports = {
   name: "yts",
-  description: "YouTube mp3 search",
+  description: "YouTube Search",
   role: 1,
-  author: "mark",
+  author: "Mark and GeoDevz69",
 
   async execute(senderId, args, pageAccessToken) {
     const prompt = args.join(" ");
 
     if (!prompt) {
       return sendMessage(senderId, {
-        text: `Usage: yts [title] \n Example: yts glue song`
+        text: `Usage: yts [title] \n Example: yts lihim song`
       }, pageAccessToken);
     }
 
     try {
-      const apiUrl = `https://kaiz-apis.gleeze.com/api/ytsearch?q=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://zen-api.up.railway.app/api/ytsearch?query=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
-      const { title, downloadUrl } = response.data.items;
+      const { title, downloadUrl } = response.data;
 
       console.log("Sending message with API URL:", apiUrl); 
       
