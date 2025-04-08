@@ -9,25 +9,25 @@ module.exports = {
 
   async execute(senderId, args, pageAccessToken) {
     try {
-      const response = await axios.get('https://apis-rho-nine.vercel.app/tikrandom');
-      const { url: url, name, description } = response.data;
+      const response = await axios.get('https://autobot.mark-projects.site/api/shoti');
+      const { playUrl, title } = response.data;
 
       await sendMessage(senderId, {
-        text: `🌸 Username: ${name}\n🗯️ Description: ${description}\n🧛 Modder: GeoDevz69`
+        text: `🌸 title: ${title}\n🗯️\n\n🧛 Modder: GeoDevz69`
       }, pageAccessToken);
 
       await sendMessage(senderId, {
         attachment: {
           type: "video",
           payload: {
-            url: url
+            url: playUrl
           }
         }
       }, pageAccessToken);
     } catch (error) {
-      console.error("Failed to fetch the Chilli video:", error);
+      console.error("chat mo si Mark Martinez para ma fix or try again shoti:", error);
       sendMessage(senderId, {
-        text: `Failed to fetch the Chilli video. Error: ${error.message || "Unknown error"}`
+        text: `Failed to fetch the Shoti video. Error: ${error.message || "Unknown error"}`
       }, pageAccessToken);
     }
   }
