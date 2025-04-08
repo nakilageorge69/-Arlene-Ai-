@@ -19,7 +19,7 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://kaiz-apis.gleeze.com/api/ytdown-mp3?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://zen-api.up.railway.app/api/search?query=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const { title, video } = response.data;
 
