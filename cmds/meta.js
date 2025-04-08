@@ -3,7 +3,7 @@ const { sendMessage } = require('../handles/message');
 
 module.exports = {
   name: 'meta',
-  description: 'Ask a question to the GPT-3 PRO',
+  description: 'Ask a question to the Meta Ai 5.0',
   role: 1,
   author: 'Mark Martinez and GeoDevz69',
 
@@ -13,7 +13,7 @@ module.exports = {
     
     if (!prompt) {
       return sendMessage(senderId, {
-        text: 'Hello! I am GPT-3 PRO, how can I help you?'
+        text: 'Hello! I am Meta Ai 5.0, how can I help you?'
       }, pageAccessToken);
     }
 
@@ -25,7 +25,7 @@ module.exports = {
 
       if (reply) {
         
-        const formattedResponse = `GPT-3 PRO:\n\n${reply}`;
+        const formattedResponse = `Meta Ai 5.0:\n\n${reply}`;
         
         
         const maxLength = 2000;
