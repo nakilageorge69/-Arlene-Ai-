@@ -9,7 +9,7 @@ module.exports = {
 
   async execute(senderId, args, pageAccessToken) {
     try {
-      const response = await axios.get('https://kaiz-apis.gleeze.com/api/shoti');
+      const response = await axios.get('https://apis-rho-nine.vercel.app/tikrandom');
       const { url: url, name, description } = response.data;
 
       await sendMessage(senderId, {
