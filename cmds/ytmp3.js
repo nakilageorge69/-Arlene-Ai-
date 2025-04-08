@@ -4,7 +4,7 @@ const { sendMessage } = require("../handles/message");
 console.log("sendMessage function:", sendMessage); 
 
 module.exports = {
-  name: "ytdl",
+  name: "ytmp3",
   description: "YouTube downloader using URL",
   role: 1,
   author: "mark",
@@ -19,7 +19,7 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://yt-video-production.up.railway.app/ytdl?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://kaiz-apis.gleeze.com/api/ytdown-mp3?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const { title, video } = response.data;
 
