@@ -4,7 +4,7 @@ const { sendMessage } = require("../handles/message");
 console.log("sendMessage function:", sendMessage); 
 
 module.exports = {
-  name: "dlnow",
+  name: "fbdl",
   description: "Facebook downloader",
   role: 1,
   author: "mark",
@@ -19,7 +19,7 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://api.zetsu.xyz/download/all?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://kaiz-apis.gleeze.com/api/fbdl-v2?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const { result } = response.data;
 
