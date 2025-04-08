@@ -2,7 +2,7 @@ const axios = require('axios');
 const { sendMessage } = require('../handles/message');
 
 module.exports = {
-  name: 'gpt3',
+  name: 'metaai',
   description: 'Ask a question to the GPT-3 PRO',
   role: 1,
   author: 'Mark Martinez and GeoDevz69',
@@ -17,7 +17,7 @@ module.exports = {
       }, pageAccessToken);
     }
 
-    const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt-3.5?q=${encodeURIComponent(prompt)}`;
+    const apiUrl = `https://zen-api.up.railway.app/api/metaai?prompt=${encodeURIComponent(prompt)}`;
 
     try {
       const response = await axios.get(apiUrl);
