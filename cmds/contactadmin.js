@@ -30,11 +30,13 @@ module.exports = {
 
       // Get all unique admin IDs with additional validation
       const allAdmins = [
-        ...new Set([
-          ...(config.adminId || []),
-          ...(config.sessions || []).map((session) => session.adminid).filter(id => id && typeof id === 'string')
-        ])
-      ].filter(Boolean);
+  ...new Set([
+    ...(config.adminId || []),
+    ...(config.sessions || []).map((session) => session.adminid).filter(id => id && typeof id === 'string')
+  ])
+].filter(Boolean);
+
+      console.log("Resolved Admin IDs:", allAdmins);
 
       if (allAdmins.length === 0) {
         console.error('No admin IDs found in configuration');
