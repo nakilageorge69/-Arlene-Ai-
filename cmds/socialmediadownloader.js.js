@@ -20,10 +20,13 @@ module.exports = {
 
     try {
       const apiUrl = `https://autobot.mark-projects.site/api/download?url=${encodeURIComponent(prompt)}`;
-      const response = await axios.get(apiUrl);
-      const { url, description } = response.data;
+const response = await axios.get(apiUrl);
 
-      console.log("Sending message with API URL:", apiUrl); 
+const { url, filename } = response.data.data;
+
+console.log("Sending message with API URL:", apiUrl);
+console.log("Download URL:", url);
+console.log("Filename:", filename);
       
       await sendMessage(senderId, {
         text: ` response : ${description} \n`
