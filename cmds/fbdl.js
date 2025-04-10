@@ -19,7 +19,7 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://kaiz-apis.gleeze.com/api/fbdl-v2?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://autobot.mark-projects.site/api/download?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const { result } = response.data;
 
