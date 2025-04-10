@@ -2,7 +2,7 @@ const axios = require('axios');
 const { sendMessage } = require('../handles/message');
 
 module.exports = {
-  name: 'sms',
+  name: 'hacksims',
   description: 'SMS spam',
   author: 'Clarence',
   role: 1,
