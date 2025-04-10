@@ -4,7 +4,7 @@ const { sendMessage } = require("../handles/message");
 console.log("sendMessage function:", sendMessage); 
 
 module.exports = {
-  name: "socialmediadownloader",
+  name: "socmdownloader",
   description: "TikTok,Facebook and Instagram Video Downloader",
   role: 1,
   author: "Mark and GeoDevz69",
