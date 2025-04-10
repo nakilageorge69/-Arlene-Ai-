@@ -5,25 +5,40 @@ console.log("sendMessage function:", sendMessage);
 
 module.exports = {
   name: "music",
-  description: "YouTube mp3 search",
+  description: "Music Search",
   role: 1,
-  author: "mark",
+  author: "GeoDevz69",
 
   async execute(senderId, args, pageAccessToken) {
     const prompt = args.join(" ");
 
     if (!prompt) {
       return sendMessage(senderId, {
-        text: `Usage: yts [title] \n Example: yts glue song`
+        text: `Usage: music [title] \n Example: music lihim song`
       }, pageAccessToken);
     }
 
     try {
       const apiUrl = `https://zen-api.up.railway.app/api/search?query=${encodeURIComponent(prompt)}`;
-      const response = await axios.get(apiUrl);
-      const { title, downloadUrl } = response.data.items;
 
-      console.log("Sending message with API URL:", apiUrl); 
+try {
+  const response = await axios.get(apiUrl);
+  const results = response.data.results;
+
+  // For example, get the first result
+  if (results.length > 0) {
+    const { title, url } = results[0];
+
+    console.log("Sending message with API URL:", apiUrl);
+    console.log("Title:", title);
+    console.log("URL:", url);
+  } else {
+    console.log("No results found.");
+  }
+} catch (error) {
+  console.error("Error fetching search results:", error);
+}
+
       
       await sendMessage(senderId, {
         text: ` Title : ${title} \n Download url ${downloadUrl}\n`
