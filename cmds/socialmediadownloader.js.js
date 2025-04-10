@@ -4,8 +4,8 @@ const { sendMessage } = require("../handles/message");
 console.log("sendMessage function:", sendMessage); 
 
 module.exports = {
-  name: "tikdl",
-  description: "TikTok Video Downloader",
+  name: "socialmediadownloader",
+  description: "TikTok,Facebook and Instagram Video Downloader",
   role: 1,
   author: "Mark and GeoDevz69",
 
@@ -19,7 +19,7 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://zen-api.up.railway.app/api/tikdl?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://autobot.mark-projects.site/api/download?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const { url, description } = response.data;
 
