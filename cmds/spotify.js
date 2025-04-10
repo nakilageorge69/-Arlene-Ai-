@@ -17,7 +17,7 @@ module.exports = {
     }
 
     try {
-      const res = await axios.get('https://kaiz-apis.gleeze.com/api/spotify-search?q=', {
+      const res = await axios.get('https://zen-api.up.railway.app/api/ytsearch?query=', {
         params: { search: searchQuery }
       });
 
