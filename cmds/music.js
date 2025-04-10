@@ -19,7 +19,7 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://kaiz-apis.gleeze.com/api/soundcloud-search?title=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://zen-api.up.railway.app/api/search?query=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const { title, downloadUrl } = response.data.items;
 
