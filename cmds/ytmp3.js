@@ -20,10 +20,11 @@ module.exports = {
 
     try {
       const apiUrl = `https://autobot.mark-projects.site/api/ytsmp3?query=${encodeURIComponent(prompt)}`;
-      const response = await axios.get(apiUrl);
-      const { title, audio } = response.data;
+const response = await axios.get(apiUrl);
+const { platform, url } = response.data.data;
 
-      console.log("Sending message with API URL:", apiUrl); 
+console.log("Platform:", platform);
+console.log("Download URL:", url); 
       
       await sendMessage(senderId, {
         text: ` Title : ${title} \n Download url ${audio} \n`
