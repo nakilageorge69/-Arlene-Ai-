@@ -3,7 +3,7 @@ const { sendMessage } = require('../handles/message');
 
 module.exports = {
   name: 'chatgpt',
-  description: 'Ask a question to the ChatGPT 5.0',
+  description: 'Ask a question to the ChatGPT 4.0',
   role: 1,
   author: 'Mark Martinez and GeoDevz69',
 
@@ -13,7 +13,7 @@ module.exports = {
     
     if (!prompt) {
       return sendMessage(senderId, {
-        text: 'Hello! I am ChatGPT 5.0, how can I help you?'
+        text: 'Hello! I am ChatGPT 4.0, how can I help you?'
       }, pageAccessToken);
     }
      //api
@@ -42,7 +42,7 @@ module.exports = {
 
       if (reply) {
         
-        const formattedResponse = `ChatGPT 5.0:\n\n${reply}`;
+        const formattedResponse = `ChatGPT 4.0:\n\n${reply}`;
         
         
         const maxLength = 2000;
