@@ -7,7 +7,7 @@ module.exports = {
   name: "ytmp3",
   description: "YouTube mp3 downloader using url",
   role: 1,
-  author: "mark",
+  author: "Mark and GeoDevz69",
 
   async execute(senderId, args, pageAccessToken) {
     const prompt = args.join(" ");
@@ -19,7 +19,7 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://kaiz-apis.gleeze.com/api/ytdown-mp3?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://autobot.mark-projects.site/api/ytsmp3?query=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const { title, audio } = response.data;
 
