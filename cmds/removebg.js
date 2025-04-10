@@ -23,13 +23,13 @@ module.exports = {
         return;
       }
 
-      const imgurResponse = await uploadToImgur(imageUrl);
+      const imgurResponse = await RemovebgOfImgur(imageUrl);
 
       if (imgurResponse?.uploaded?.status === "success") {
         const imgurLink = imgurResponse.uploaded.image;
         sendMessage(bot, { text: `Background Removing: ${imgurLink}` }, authToken);
       } else {
-        sendMessage(bot, { text: "Failed to upload the image to Imgur." }, authToken);
+        sendMessage(bot, { text: "Failed to Removebg of Imgur." }, authToken);
       }
     } catch (error) {
       console.error("Error in Imgur command:", error);
@@ -65,13 +65,13 @@ async function getRepliedImage(mid, authToken) {
   }
 }
 
-async function uploadToImgur(imageUrl) {
+async function RemovebgOfImgur(imageUrl) {
   try {
     const apiUrl = `https://kaiz-apis.gleeze.com/api/removebg?url=${encodeURIComponent(imageUrl)}`;
     const response = await axios.get(apiUrl);
     return response.data;
   } catch (error) {
-    console.error("Failed to upload to Imgur:", error);
+    console.error("Failed to upload to removebg:", error);
     return null;
   }
-                                                                 }
+      }
