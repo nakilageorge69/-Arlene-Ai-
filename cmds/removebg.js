@@ -1,55 +1,62 @@
 const axios = require("axios");
-const { sendMessage } = require('../handles/message');
+const { sendMessage } = require("../handles/message");
 
 module.exports = {
   name: "removebg",
-  description: "Background Image Remover.",
+  description: "Removes background from an image.",
   role: 1,
-  author: "Clarence and GeoDevz69",
+  author: " created by: Mark Martinez",
 
   async execute(bot, args, authToken, event) {
     if (!event?.sender?.id) {
-      console.error('Invalid event object: Missing sender ID.');
-      sendMessage(bot, { text: 'Error: Missing sender ID.' }, authToken);
+      console.error("Missing sender ID.");
+      sendMessage(bot, { text: "Error: Missing sender ID." }, authToken);
       return;
     }
 
     try {
-      const senderId = event.sender.id;
       const imageUrl = await extractImageUrl(event, authToken);
-
       if (!imageUrl) {
-        sendMessage(bot, { text: "Please reply to an image or send an image with the command to upload it to Imgur." }, authToken);
+        sendMessage(bot, { text: "No image found. Please reply to an image or send an image directly.😂" }, authToken);
         return;
       }
 
-      const imgurResponse = await RemovebgOfImgur(imageUrl);
+      const apiUrl = `https://kaiz-apis.gleeze.com/api/removebg?url=${encodeURIComponent(imageUrl)}&stream=false`;
+      const response = await axios.get(apiUrl);
+      const finalUrl = response.data?.url;
 
-      if (imgurResponse?.uploaded?.status === "success") {
-        const imgurLink = imgurResponse.uploaded.image;
-        sendMessage(bot, { text: `Background Removing: ${imgurLink}` }, authToken);
+      if (finalUrl) {
+        sendMessage(
+          bot,
+          {
+            attachment: {
+              type: "image",
+              payload: {
+                url: finalUrl
+              }
+            }
+          },
+          authToken
+        );
       } else {
-        sendMessage(bot, { text: "Failed to Removebg of Imgur." }, authToken);
+        sendMessage(bot, { text: "Failed to get processed image. Tanga ka." }, authToken);
       }
-    } catch (error) {
-      console.error("Error in Imgur command:", error);
-      sendMessage(bot, { text: `Error: ${error.message || "Something went wrong."}` }, authToken);
+    } catch (err) {
+      console.error("Removebg command error:", err);
+      sendMessage(bot, { text: `Error: ${err.message || "Something went wrong."}` }, authToken);
     }
   }
 };
 
 async function extractImageUrl(event, authToken) {
   try {
-
     if (event.message.reply_to?.mid) {
       return await getRepliedImage(event.message.reply_to.mid, authToken);
-    }
-
-    if (event.message?.attachments?.[0]?.type === 'image') {
+    } else if (event.message?.attachments?.[0]?.type === "image") {
       return event.message.attachments[0].payload.url;
     }
-  } catch (error) {
-    console.error("Failed to extract image URL:", error);
+  } catch (err) {
+    console.error("Image extraction failed:", err);
   }
   return "";
 }
@@ -58,20 +65,9 @@ async function getRepliedImage(mid, authToken) {
   try {
     const { data } = await axios.get(`https://graph.facebook.com/v21.0/${mid}/attachments`, {
       params: { access_token: authToken }
-    });
+    }); 
     return data?.data[0]?.image_data?.url || "";
-  } catch (error) {
+  } catch {
     throw new Error("Failed to retrieve replied image.");
   }
 }
-
-async function RemovebgOfImgur(imageUrl) {
-  try {
-    const apiUrl = `https://kaiz-apis.gleeze.com/api/removebg?url=${encodeURIComponent(imageUrl)}`;
-    const response = await axios.get(apiUrl);
-    return response.data;
-  } catch (error) {
-    console.error("Failed to upload to removebg:", error);
-    return null;
-  }
-      }
