@@ -17,11 +17,11 @@ module.exports = {
       }, pageAccessToken);
     }
 
-    const apiUrl = `https://zen-api.up.railway.app/api/metaai?prompt=${encodeURIComponent(prompt)}`;
+    const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/okeyai?ask=${encodeURIComponent(prompt)}`;
 
     try {
       const response = await axios.get(apiUrl);
-      const reply = response.data;
+      const reply = response.data.response;
 
       if (reply) {
         
