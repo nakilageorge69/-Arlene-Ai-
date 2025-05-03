@@ -38,7 +38,7 @@ module.exports = {
     const query = args.join(' ');
 
     try {
-      const apiUrl = `https://kaiz-apis.gleeze.com/api/gpt4o-latest?ask=${encodeURIComponent(query)}&uid=1`;
+      const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/gpt4-omni?ask=${encodeURIComponent(query)}&userid=100076235372369`;
       const response = await axios.get(apiUrl);
       const gptResponse = response.data.response;
 
