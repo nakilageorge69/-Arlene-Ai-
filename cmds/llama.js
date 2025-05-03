@@ -14,12 +14,12 @@ module.exports = {
       return sendMessage(senderId, { text: 'Hello I\'m Mixtral AI, how can I assist you today?' }, pageAccessToken);
     }
 
-    const apiUrl = `https://zen-api.up.railway.app/api/llama3-8b-8192?query=${encodeURIComponent(query)}`;
+    const apiUrl = `https://api.zetsu.xyz/ai/llama-3-8b?q=&uid=${encodeURIComponent(query)}`;
 
 
     try {
       const response = await axios.get(apiUrl);
-      const urlresponse = response.data.response;
+      const urlresponse = response.data.result;
       
       if (urlresponse) { 
         const formattedResponse = `🤖 LLAMA 3.0\n\n${urlresponse}`;
