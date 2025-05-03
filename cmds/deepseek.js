@@ -17,7 +17,7 @@ module.exports = {
       }, pageAccessToken);
     }
 
-    const apiUrl = `https://zen-api.up.railway.app/api/deepseek?query=${encodeURIComponent(prompt)}`;
+    const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/Deepseek-V3?ask=${encodeURIComponent(prompt)}`;
 
     try {
       const response = await axios.get(apiUrl);
