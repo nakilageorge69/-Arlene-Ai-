@@ -9,7 +9,7 @@ module.exports = {
   async execute(senderId, args, pageAccessToken) {
     const prompt = args.join(' ');
     try {
-      const apiUrl = `https://kaiz-apis.gleeze.com/api/aidetector?q=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/aidetect?text=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
       const { ai, human, message } = response.data;
 
