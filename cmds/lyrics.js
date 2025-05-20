@@ -12,21 +12,19 @@ module.exports = {
     try {
       const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/lyrics-finder?title=${encodeURIComponent(query)}`;
       const response = await axios.get(apiUrl);
-      const result = response.data.title; 
+      const data = response.data;
 
-      if (result && result.lyrics) {
-        const lyricsMessage = `Title: ${result.title}\nArtist: ${result.artist}\n\n${result.lyrics}`;
-
+      if (data && data.response) {
+        const lyricsMessage = `Title: ${data.Title}\nAuthor: ${data.author}\n\n${data.response}`;
 
         await sendResponseInChunks(senderId, lyricsMessage, pageAccessToken);
 
-        
-        if (result.image) {
+        if (data.Thumbnail) {
           await sendMessage(senderId, {
             attachment: {
               type: 'image',
               payload: {
-                url: result.image,
+                url: data.Thumbnail,
                 is_reusable: true,
               },
             },
@@ -43,7 +41,6 @@ module.exports = {
   },
 };
 
-
 async function sendResponseInChunks(senderId, text, pageAccessToken) {
   const maxMessageLength = 2000;
   if (text.length > maxMessageLength) {
@@ -55,7 +52,6 @@ async function sendResponseInChunks(senderId, text, pageAccessToken) {
     await sendMessage(senderId, { text }, pageAccessToken);
   }
 }
-
 
 function splitMessageIntoChunks(message, chunkSize) {
   const chunks = [];
