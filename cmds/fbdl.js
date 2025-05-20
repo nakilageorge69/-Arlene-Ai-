@@ -7,7 +7,7 @@ module.exports = {
   name: "fbdl",
   description: "Facebook downloader",
   role: 1,
-  author: "mark",
+  author: "GeoDevz69",
 
   async execute(senderId, args, pageAccessToken) {
     const prompt = args.join(" ");
@@ -19,28 +19,38 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://autobot.mark-projects.site/api/download?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/fbdlv2?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
-      const { result } = response.data;
 
-      console.log("Sending message with API URL:", apiUrl); 
-      
-      
- 
+      const { success, url, title } = response.data;
+
+      console.log("API response:", response.data);
+
+      if (!success || !url) {
+        return sendMessage(senderId, {
+          text: `Failed to fetch the video. Please make sure the URL is a public Facebook video.`
+        }, pageAccessToken);
+      }
+
+      await sendMessage(senderId, {
+        text: `Title: ${title || 'No title available'}`
+      }, pageAccessToken);
+
       await sendMessage(senderId, {
         attachment: {
           type: "video",
           payload: {
-            url: result
+            url: url
           }
         }
       }, pageAccessToken);
 
     } catch (error) {
-      console.error("error pa fix kay owner:", error);
+      console.error("Error occurred:", error.message);
       sendMessage(senderId, {
-        text: `error pa fix kay owner. Please try again or check your input.`
+        text: `An error occurred while processing your request. Please try again later.`
       }, pageAccessToken);
     }
   }
 };
+
