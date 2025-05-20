@@ -1,11 +1,11 @@
 const axios = require("axios");
 const { sendMessage } = require("../handles/message");
 
-console.log("sendMessage function:", sendMessage); 
+console.log("sendMessage function:", sendMessage);
 
 module.exports = {
   name: "socmdownloader",
-  description: "TikTok,Facebook and Instagram Video Downloader",
+  description: "Facebook Video Downloader via BetaDash",
   role: 1,
   author: "Mark and GeoDevz69",
 
@@ -19,33 +19,36 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://autobot.mark-projects.site/api/download?url=${encodeURIComponent(prompt)}`;
-const response = await axios.get(apiUrl);
+      const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/fbdlv2?url=${encodeURIComponent(prompt)}`;
+      const response = await axios.get(apiUrl);
 
-const { url, filename } = response.data.data;
+      const data = response.data;
 
-console.log("Sending message with API URL:", apiUrl);
-console.log("Download URL:", url);
-console.log("Filename:", filename);
-      
+      if (!data || !data.success || !data.url) {
+        return sendMessage(senderId, {
+          text: `Download failed. Please check the URL or try again later.`
+        }, pageAccessToken);
+      }
+
+      console.log("API response:", data);
+
       await sendMessage(senderId, {
-        text: ` response : ${description} \n`
+        text: `Video Title: ${data.title || 'N/A'}`
       }, pageAccessToken);
-      
- 
+
       await sendMessage(senderId, {
         attachment: {
           type: "video",
           payload: {
-            url: url
+            url: data.url
           }
         }
       }, pageAccessToken);
 
     } catch (error) {
-      console.error("error pa fix kay owner:", error);
+      console.error("Error occurred:", error.message);
       sendMessage(senderId, {
-        text: `error pa fix kay owner. Please try again or check your input.`
+        text: `An error occurred. Please try again later or contact the developer.`
       }, pageAccessToken);
     }
   }
