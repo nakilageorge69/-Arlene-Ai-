@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { sendMessage } = require("../handles/message");
 
-console.log("sendMessage function:", sendMessage); 
+console.log("sendMessage function:", sendMessage);
 
 module.exports = {
   name: "fbdl",
@@ -19,28 +19,28 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/fbdlv2?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://zen-api.gleeze.com/api/fbdl?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
-
-      const { success, url, title } = response.data;
 
       console.log("API response:", response.data);
 
-      if (!success || !url) {
+      const videoUrl = response.data.result;
+
+      if (!videoUrl) {
         return sendMessage(senderId, {
           text: `Failed to fetch the video. Please make sure the URL is a public Facebook video.`
         }, pageAccessToken);
       }
 
       await sendMessage(senderId, {
-        text: `Title: ${title || 'No title available'}`
+        text: `Here is your downloaded video:`
       }, pageAccessToken);
 
       await sendMessage(senderId, {
         attachment: {
           type: "video",
           payload: {
-            url: url
+            url: videoUrl
           }
         }
       }, pageAccessToken);
@@ -53,4 +53,3 @@ module.exports = {
     }
   }
 };
-
