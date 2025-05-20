@@ -14,22 +14,22 @@ module.exports = {
         return sendMessage(senderId, { text: "Usage: tiksearch <search text>" }, pageAccessToken);
       }
 
-      const response = await axios.get(`https://kaiz-apis.gleeze.com/api/tiksearch?search=${encodeURIComponent(searchQuery)}`);
-      const videos = response.data.data.videos;
+      const response = await axios.get(`https://zen-api.gleeze.com/api/tiktok?query=${encodeURIComponent(searchQuery)}`);
+      const videoData = response.data;
 
-      if (!videos || videos.length === 0) {
-        return sendMessage(senderId, { text: "No videos found for the given search query." }, pageAccessToken);
+      if (!videoData || !videoData.no_watermark) {
+        return sendMessage(senderId, { text: "No video found for the given search query." }, pageAccessToken);
       }
 
+      const videoUrl = videoData.no_watermark;
 
-      const videoData = videos[0];
-      const videoUrl = videoData.play;
+      const message = `📹 Tiksearch Result:\n\n👤 Creator: ${videoData.creator}\n\n📝 Title: ${videoData.title}`;
 
-      const message = `📹 Tiksearch Result:\n\n👤 Post by: ${videoData.author.nickname}\n🔗 Username: ${videoData.author.unique_id}\n\n📝 Title: ${videoData.title}`;
+      // Send text message
+      await sendMessage(senderId, { text: message }, pageAccessToken);
 
-      sendMessage(senderId, { text: message }, pageAccessToken);
-
-      sendMessage(senderId, {
+      // Send video
+      await sendMessage(senderId, {
         attachment: {
           type: 'video',
           payload: {
@@ -38,10 +38,10 @@ module.exports = {
           }
         }
       }, pageAccessToken);
+
     } catch (error) {
       console.error('Error:', error);
       sendMessage(senderId, { text: "An error occurred while processing the request." }, pageAccessToken);
     }
   }
 };
-      
