@@ -17,43 +17,49 @@ module.exports = {
     }
 
     try {
-      const res = await axios.get('https://zen-api.up.railway.app/api/ytsearch?query=', {
-        params: { search: searchQuery }
+      const res = await axios.get('https://betadash-api-swordslush-production.up.railway.app/spt', {
+        params: { title: searchQuery }
       });
 
-      if (!res || !res.data || res.data.length === 0) {
+      const trackData = res?.data;
+
+      if (!trackData) {
         throw new Error("No results found");
       }
 
-      const { name: trackName, download, image, track } = res.data[0];
+      const { title, duration, thumbnail, download_url, artists } = trackData;
 
+      const minutes = Math.floor(duration / 60000);
+      const seconds = Math.floor((duration % 60000) / 1000);
+      const formattedDuration = `${minutes}:${seconds.toString().padStart(2, '0')}`;
 
+      // Send track info
       await sendMessage(senderId, {
-        text: `🎶 Now playing: ${trackName}\n\n🔗 Spotify Link: ${track}`
+        text: `🎶 Now playing: ${title}\n👤 Artist: ${artists}\n⏱ Duration: ${formattedDuration}`
       }, pageAccessToken);
 
- 
+      // Send album cover
       await sendMessage(senderId, {
         attachment: {
           type: "image",
           payload: {
-            url: image
+            url: thumbnail
           }
         }
       }, pageAccessToken);
 
-
+      // Send audio file
       await sendMessage(senderId, {
         attachment: {
           type: "audio",
           payload: {
-            url: download
+            url: download_url
           }
         }
       }, pageAccessToken);
 
     } catch (error) {
-      console.error("Error retrieving the Spotify track:", error);
+      console.error("Error retrieving the Spotify track:", error.message || error);
       await sendMessage(senderId, {
         text: `Error retrieving the Spotify track. Please try again or check your input.`
       }, pageAccessToken);
