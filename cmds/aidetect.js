@@ -4,22 +4,20 @@ const { sendMessage } = require('../handles/message'); // Adjust the path as nec
 module.exports = {
   name: 'aidetect',
   description: 'Detect if a text was written by an AI or a human',
-  author: 'Clarence',
+  author: 'GeoDevz69',
   role: 1,
   async execute(senderId, args, pageAccessToken) {
     const prompt = args.join(' ');
     try {
-      const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/aidetect?text=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://zen-api.gleeze.com/api/ai-detector?text=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
-      const { ai, human, message } = response.data;
+      const { result } = response.data;
 
-      
-      const fullResponse = `AI Generated: ${ai}\nHuman Generated: ${human}\nMessage: ${message}`;
+      const fullResponse = `Result:\n\n${result}`;
 
-      
       await sendResponseInChunks(senderId, fullResponse, pageAccessToken);
     } catch (error) {
-      console.error('Error calling AI Detection API:', error);
+      console.error('Error calling AI Detection API:', error.message);
       await sendMessage(senderId, { text: 'Sorry, there was an error processing your request.' }, pageAccessToken);
     }
   }
@@ -56,3 +54,4 @@ function splitMessageIntoChunks(message, chunkSize) {
 
   return chunks;
 }
+
