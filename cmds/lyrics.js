@@ -12,7 +12,7 @@ module.exports = {
     try {
       const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/lyrics-finder?title=${encodeURIComponent(query)}`;
       const response = await axios.get(apiUrl);
-      const result = response.data.response; 
+      const result = response.data.title; 
 
       if (result && result.lyrics) {
         const lyricsMessage = `Title: ${result.title}\nArtist: ${result.artist}\n\n${result.lyrics}`;
