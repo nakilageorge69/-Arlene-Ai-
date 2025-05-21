@@ -4,7 +4,7 @@ const { sendMessage } = require("../handles/message");
 console.log("sendMessage function:", sendMessage);
 
 module.exports = {
-  name: "fbdl",
+  name: "ytdl",
   description: "Facebook downloader",
   role: 1,
   author: "GeoDevz69",
@@ -14,21 +14,31 @@ module.exports = {
 
     if (!prompt) {
       return sendMessage(senderId, {
-        text: `Usage: fbdl [ URL ]`
+        text: `Usage: ytdl [ URL ]`
       }, pageAccessToken);
     }
 
     try {
-      const apiUrl = `https://zen-api.gleeze.com/api/fbdl?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/ytdlv5?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
 
       console.log("API response:", response.data);
 
-      const videoUrl = response.data.result;
-
-      if (!videoUrl) {
+      const formats = response.data.formats;
+      if (!formats || formats.length === 0) {
         return sendMessage(senderId, {
-          text: `Failed to fetch the video. Please make sure the URL is a public Facebook video.`
+          text: `No downloadable formats found. Please try a different URL.`
+        }, pageAccessToken);
+      }
+
+      // Try to find 360p mp4 format, fallback to any mp4 format
+      const preferredFormat = formats.find(f => f.format_note === "360p" && f.url.includes("mp4")) ||
+                              formats.find(f => f.url.includes("mp4")) ||
+                              formats[0]; // fallback to first format
+
+      if (!preferredFormat?.url) {
+        return sendMessage(senderId, {
+          text: `Failed to extract a valid video URL from the API response.`
         }, pageAccessToken);
       }
 
@@ -40,7 +50,7 @@ module.exports = {
         attachment: {
           type: "video",
           payload: {
-            url: videoUrl
+            url: preferredFormat.url
           }
         }
       }, pageAccessToken);
