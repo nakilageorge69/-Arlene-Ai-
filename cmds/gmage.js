@@ -16,21 +16,30 @@ module.exports = {
     }
 
     const prompt = args.join(' ');
-    const apiUrl = `https://kaiz-apis.gleeze.com/api/poli?prompt=${encodeURIComponent(prompt)}`;
+    const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/image?search=${encodeURIComponent(prompt)}`;
     
-
     try {
+      const response = await axios.get(apiUrl);
+      const images = response.data.images;
+
+      if (!images || images.length === 0) {
+        await sendMessage(senderId, {
+          text: 'No images were returned. Please try a different prompt.'
+        }, pageAccessToken);
+        return;
+      }
+
       await sendMessage(senderId, {
         attachment: {
           type: 'image',
           payload: {
-            url: apiUrl
+            url: images[0]  // Sends the first image
           }
         }
       }, pageAccessToken);
 
     } catch (error) {
-      console.error('Error generating image:', error);
+      console.error('Error generating image:', error.message || error);
       await sendMessage(senderId, {
         text: 'An error occurred while generating the image. Please try again later.'
       }, pageAccessToken);
