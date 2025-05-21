@@ -5,7 +5,7 @@ console.log("sendMessage function:", sendMessage);
 
 module.exports = {
   name: "ytdl",
-  description: "Facebook downloader",
+  description: "YouTube Downloader",
   role: 1,
   author: "GeoDevz69",
 
