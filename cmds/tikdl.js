@@ -14,7 +14,7 @@ module.exports = {
 
     if (!prompt) {
       return sendMessage(senderId, {
-        text: `Usage: ytdl [ URL ]`
+        text: `Usage: tikdl [ URL ]`
       }, pageAccessToken);
     }
 
