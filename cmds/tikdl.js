@@ -5,7 +5,7 @@ console.log("sendMessage function:", sendMessage);
 
 module.exports = {
   name: "tikdl",
-  description: "YouTube Downloader",
+  description: "TikTok Downloader",
   role: 1,
   author: "GeoDevz69",
 
