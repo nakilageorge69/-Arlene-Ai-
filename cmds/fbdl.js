@@ -14,7 +14,7 @@ module.exports = {
 
     if (!prompt) {
       return sendMessage(senderId, {
-        text: `Usage: ytdl [ Facebook Video URL ]`
+        text: `Usage: fbdl [ Facebook Video URL ]`
       }, pageAccessToken);
     }
 
