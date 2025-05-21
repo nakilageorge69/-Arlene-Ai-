@@ -23,7 +23,7 @@ module.exports = {
     //const apiUrl = `https://clarence-rest-apiv1.onrender.com/api/blackbox?message=${encodeURIComponent(prompt)}`;
     
     //after
-     const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/copilot?ask=${encodeURIComponent(prompt)}`;
+     const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/phi?ask=${encodeURIComponent(prompt)}`;
      
      //tignan mo yung pinag kaiba ng before and after tas pag may uid sa dulo i dudugtong molang din yon katulad ng after 
      
