@@ -19,26 +19,16 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/ytdlv5?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/ytdlv3?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
 
       console.log("API response:", response.data);
 
-      const formats = response.data.formats;
-      if (!formats || formats.length === 0) {
-        return sendMessage(senderId, {
-          text: `No downloadable formats found. Please try a different URL.`
-        }, pageAccessToken);
-      }
+      const { success, download_url } = response.data;
 
-      // Try to find 360p mp4 format, fallback to any mp4 format
-      const preferredFormat = formats.find(f => f.format_note === "360p" && f.url.includes("mp4")) ||
-                              formats.find(f => f.url.includes("mp4")) ||
-                              formats[0]; // fallback to first format
-
-      if (!preferredFormat?.url) {
+      if (!success || !download_url) {
         return sendMessage(senderId, {
-          text: `Failed to extract a valid video URL from the API response.`
+          text: `Failed to retrieve download link. Please check the URL and try again.`
         }, pageAccessToken);
       }
 
@@ -50,7 +40,7 @@ module.exports = {
         attachment: {
           type: "video",
           payload: {
-            url: preferredFormat.url
+            url: download_url
           }
         }
       }, pageAccessToken);
