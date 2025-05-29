@@ -2,7 +2,7 @@ const axios = require('axios');
 const { sendMessage } = require('../handles/message');
 
 module.exports = {
-  name: 'mixtral',
+  name: 'assistant',
   description: 'Ask a question to the Mixtral AI',
   role: 1,
   author: 'French Clarence Mangigo',
@@ -14,15 +14,15 @@ module.exports = {
       return sendMessage(senderId, { text: 'Hello I\'m Mixtral AI, how can I assist you today?' }, pageAccessToken);
     }
 
-    const apiUrl = `https://kaiz-apis.gleeze.com/api/mixtral-8x22b?q=${encodeURIComponent(query)}&uid=1`;
+    const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/assistant?chat=${encodeURIComponent(query)}`;
 
 
     try {
       const response = await axios.get(apiUrl);
-      const urlresponse = response.data.content;
+      const urlresponse = response.data.response;
       
       if (urlresponse) { 
-        const formattedResponse = `🤖 𝗠𝗜𝗫𝗧𝗥𝗔𝗟 𝗔𝗜\n\n${urlresponse}`;
+        const formattedResponse = `🧑‍💻 RESEARCHERS AI:\n\n${urlresponse}`;
         await sendResponseInChunks(senderId, formattedResponse, pageAccessToken);
       } else {
         await sendMessage(senderId, { text: 'Sorry, there was an error processing your request.' }, pageAccessToken);
