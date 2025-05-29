@@ -1,5 +1,3 @@
-//Eto okay nato test mo kung working 
-
 const axios = require("axios");
 const { sendMessage } = require("../handles/message");
 
@@ -8,10 +6,17 @@ console.log("sendMessage function:", sendMessage);
 module.exports = {
   name: "post",
   description: "Post a message to the Facebook Page",
-  role: 1,
-  author: "Mark Martinez",
+  role: 1, // Required role for this command
+  author: "GeoDevz69",
 
-  async execute(senderId, args, pageAccessToken) {
+  async execute(senderId, args, pageAccessToken, userRole) {
+    // Check if the user has the required role
+    if (userRole !== 1) {
+      return sendMessage(senderId, {
+        text: `❌ You do not have permission to use this command.`
+      }, pageAccessToken);
+    }
+
     const message = args.join(" ");
 
     if (!message) {
@@ -22,7 +27,6 @@ module.exports = {
 
     try {
       const PAGE_ID = "530043216861391"; // Your Facebook Page ID
-
       const apiUrl = `https://graph.facebook.com/v21.0/${PAGE_ID}/feed`;
 
       console.log("Posting to Facebook Page:", apiUrl);
