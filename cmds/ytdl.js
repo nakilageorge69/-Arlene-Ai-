@@ -3,7 +3,7 @@ const { sendMessage } = require("../handles/message");
 
 module.exports = {
   name: "ytdl",
-  description: "Facebook Video Downloader",
+  description: "YouTube Video Downloader",
   role: 1,
   author: "GeoDevz69",
 
