@@ -1,11 +1,9 @@
 const axios = require("axios");
 const { sendMessage } = require("../handles/message");
 
-console.log("sendMessage function:", sendMessage);
-
 module.exports = {
   name: "ytdl",
-  description: "YouTube Downloader",
+  description: "Facebook Video Downloader",
   role: 1,
   author: "GeoDevz69",
 
@@ -14,7 +12,7 @@ module.exports = {
 
     if (!prompt) {
       return sendMessage(senderId, {
-        text: `Usage: ytdl [ URL ]`
+        text: `Usage: ytdl [ Facebook Video URL ]`
       }, pageAccessToken);
     }
 
@@ -24,21 +22,41 @@ module.exports = {
 
       console.log("API response:", response.data);
 
-      const { status, title, thumbnail, video, audio } = response.data;
+      const { author, title, thumbnail, duration, video } = response.data;
 
-      if (status !== "true" || !video) {
+      if (!video) {
         return sendMessage(senderId, {
-          text: `Failed to retrieve the download link. Please check the URL and try again.`
+          text: `No downloadable video found. Please try a different Facebook video URL.`
         }, pageAccessToken);
       }
 
-      // Send video details
+      const message = `🎬 Facebook Video Details:\n\n` +
+                       `📝 Title: ${title || "No title"}\n` +
+                       `👤 Author: ${author || "Unknown"}\n` +
+                       `⏱ Duration: ${duration?.label || "Unknown"}\n` +
+                       `🔗 Video Link: ${video}`;
+
+      await sendMessage(senderId, { text: message }, pageAccessToken);
+
+      // Send the video thumbnail
+      if (thumbnail) {
+        await sendMessage(senderId, {
+          attachment: {
+            type: "image",
+            payload: {
+              url: thumbnail,
+              is_reusable: true
+            }
+          }
+        }, pageAccessToken);
+      }
+
+      // Send the video
       await sendMessage(senderId, {
-        text: `✅ **Title:** ${title}\n\n🎥 **Video Download:** [Click here](${video})\n\n🔈 **Audio Download:** [Click here](${audio})`,
         attachment: {
-          type: "image",
+          type: "video",
           payload: {
-            url: thumbnail
+            url: video
           }
         }
       }, pageAccessToken);
