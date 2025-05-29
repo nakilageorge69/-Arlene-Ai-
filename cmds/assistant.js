@@ -5,7 +5,7 @@ module.exports = {
   name: 'assistant',
   description: 'Ask a question to the Mixtral AI',
   role: 1,
-  author: 'French Clarence Mangigo',
+  author: 'GeoDevz69',
 
   async execute(senderId, args, pageAccessToken) {
     const query = args.join(' ').trim();
