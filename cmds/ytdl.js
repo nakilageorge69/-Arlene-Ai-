@@ -19,28 +19,26 @@ module.exports = {
     }
 
     try {
-      const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/ytdlv3?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/ytdl?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
 
       console.log("API response:", response.data);
 
-      const { success, download_url } = response.data;
+      const { status, title, thumbnail, video, audio } = response.data;
 
-      if (!success || !download_url) {
+      if (status !== "true" || !video) {
         return sendMessage(senderId, {
-          text: `Failed to retrieve download link. Please check the URL and try again.`
+          text: `Failed to retrieve the download link. Please check the URL and try again.`
         }, pageAccessToken);
       }
 
+      // Send video details
       await sendMessage(senderId, {
-        text: `Here is your downloaded video:`
-      }, pageAccessToken);
-
-      await sendMessage(senderId, {
+        text: `✅ **Title:** ${title}\n\n🎥 **Video Download:** [Click here](${video})\n\n🔈 **Audio Download:** [Click here](${audio})`,
         attachment: {
-          type: "video",
+          type: "image",
           payload: {
-            url: download_url
+            url: thumbnail
           }
         }
       }, pageAccessToken);
