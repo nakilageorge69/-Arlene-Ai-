@@ -5,7 +5,7 @@ module.exports = {
   name: "newsupdate",
   description: "Search for news articles",
   role: 1,
-  author: "French Clarence Mangigo",
+  author: "GeoDevz69",
 
   async execute(senderId, args, pageAccessToken) {
     try {
