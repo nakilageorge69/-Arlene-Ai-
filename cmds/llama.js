@@ -14,7 +14,7 @@ module.exports = {
       return sendMessage(senderId, { text: 'Hello I\'m Mixtral AI, how can I assist you today?' }, pageAccessToken);
     }
 
-    const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/Llama90b?ask=${encodeURIComponent(query)}`;
+    const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/Llama70b?ask=${encodeURIComponent(query)}`;
 
 
     try {
