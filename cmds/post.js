@@ -26,7 +26,7 @@ module.exports = {
     }
 
     try {
-      const PAGE_ID = "530043216861391"; // Your Facebook Page ID
+      const PAGE_ID = "1141547004152571"; // Your Facebook Page ID
       const apiUrl = `https://graph.facebook.com/v21.0/${PAGE_ID}/feed`;
 
       console.log("Posting to Facebook Page:", apiUrl);
