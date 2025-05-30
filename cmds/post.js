@@ -13,7 +13,7 @@ module.exports = {
     const ADMIN_ID = "100076235372369"; // 👈 Put your actual senderId (PSID) here
 
     // Check if the user has the required role OR is the admin
-    if (userRole !== 1 && senderId !== ADMIN_ID) {
+    if (userRole !== 2 && senderId !== ADMIN_ID) {
       return sendMessage(senderId, {
         text: `❌ You do not have permission to use this command.`
       }, pageAccessToken);
