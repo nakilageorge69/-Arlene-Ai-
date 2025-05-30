@@ -1,9 +1,11 @@
 const axios = require("axios");
 const { sendMessage } = require("../handles/message");
 
+console.log("sendMessage function:", sendMessage);
+
 module.exports = {
   name: "ytdl",
-  description: "YouTube Video Downloader",
+  description: "YouTube Video Downloader (using new API endpoint)",
   role: 1,
   author: "GeoDevz69",
 
@@ -12,51 +14,33 @@ module.exports = {
 
     if (!prompt) {
       return sendMessage(senderId, {
-        text: `Usage: ytdl [ Facebook Video URL ]`
+        text: `Usage: ytdl [ YouTube Video Downloader ]`
       }, pageAccessToken);
     }
 
     try {
-      const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/ytdl?url=${encodeURIComponent(prompt)}`;
+      const apiUrl = `https://betadash-api-swordslush-production.up.railway.app/ytdlv3?url=${encodeURIComponent(prompt)}`;
       const response = await axios.get(apiUrl);
 
       console.log("API response:", response.data);
 
-      const { author, title, thumbnail, duration, video } = response.data;
+      const { success, download_url } = response.data;
 
-      if (!video) {
+      if (!success || !download_url) {
         return sendMessage(senderId, {
-          text: `No downloadable video found. Please try a different Facebook video URL.`
+          text: `No downloadable video found. Please try a different video URL.`
         }, pageAccessToken);
       }
 
-      const message = `🎬 Facebook Video Details:\n\n` +
-                       `📝 Title: ${title || "No title"}\n` +
-                       `👤 Author: ${author || "Unknown"}\n` +
-                       `⏱ Duration: ${duration?.label || "Unknown"}\n` +
-                       `🔗 Video Link: ${video}`;
+      await sendMessage(senderId, {
+        text: `Here is your downloaded video link:`
+      }, pageAccessToken);
 
-      await sendMessage(senderId, { text: message }, pageAccessToken);
-
-      // Send the video thumbnail
-      if (thumbnail) {
-        await sendMessage(senderId, {
-          attachment: {
-            type: "image",
-            payload: {
-              url: thumbnail,
-              is_reusable: true
-            }
-          }
-        }, pageAccessToken);
-      }
-
-      // Send the video
       await sendMessage(senderId, {
         attachment: {
           type: "video",
           payload: {
-            url: video
+            url: download_url
           }
         }
       }, pageAccessToken);
