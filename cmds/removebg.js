@@ -5,7 +5,7 @@ module.exports = {
   name: "removebg",
   description: "Removes background from an image.",
   role: 1,
-  author: "GeoDevz69",
+  author: "created by: GeoDevz69",
 
   async execute(bot, args, authToken, event) {
     if (!event?.sender?.id) {
@@ -22,7 +22,7 @@ module.exports = {
       }
 
       // Updated API URL
-      const apiUrl = `https://kaiz-apis.gleeze.com/api/removebg?url=${encodeURIComponent(imageUrl)}&stream=True&apikey=ec7d563d-adae-4048-af08-0a5252f336d1`;
+      const apiUrl = `https://kaiz-apis.gleeze.com/api/removebgv2?url=${encodeURIComponent(imageUrl)}&stream=True&apikey=ec7d563d-adae-4048-af08-0a5252f336d1`;
       const response = await axios.get(apiUrl);
 
       const finalUrl = response.data?.url;
