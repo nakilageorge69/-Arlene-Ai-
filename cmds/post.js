@@ -10,10 +10,10 @@ module.exports = {
   author: "GeoDevz69",
 
   async execute(senderId, args, pageAccessToken, userRole) {
-    const ADMIN_ID = "100076235372369"; // 👈 Put your actual senderId (PSID) here
+    const ADMIN_ID = "9066345033442093"; // 👈 Put your actual senderId (PSID) here
 
     // Check if the user has the required role OR is the admin
-    if (userRole !== 2 && senderId !== ADMIN_ID) {
+    if (userRole !== 1 && senderId !== ADMIN_ID) {
       return sendMessage(senderId, {
         text: `❌ You do not have permission to use this command.`
       }, pageAccessToken);
