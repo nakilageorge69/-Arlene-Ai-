@@ -3,26 +3,25 @@ const { sendMessage } = require("../handles/message");
 
 module.exports = {
   name: "remini",
-  description: "Upscale images to 4K resolution.",
+  description: "Enhanced images to 4K resolution.",
   role: 1,
   author: "GeoDevz69",
 
   async execute(bot, args, authToken, event) {
     if (!event?.sender?.id) {
       console.error("Missing sender ID.");
-      sendMessage(bot, { text: "Error: Missing sender ID." }, authToken);
+      await sendMessage(bot, { text: "❌| Error: Missing sender ID." }, authToken);
       return;
     }
 
     try {
       const imageUrl = await extractImageUrl(event, authToken);
       if (!imageUrl) {
-        sendMessage(bot, { text: "No image found. Please reply to an image or send an image directly." }, authToken);
+        await sendMessage(bot, { text: "❌| No image found. Please reply to an image or send an image directly." }, authToken);
         return;
       }
 
-      const apiKey = "xyz";
-      const upscaleUrl = `https://smfahim.${apiKey}/4k?url=${encodeURIComponent(imageUrl)}`;
+      const upscaleUrl = `https://kaiz-apis.gleeze.com/api/remini?url=${encodeURIComponent(imageUrl)}`;
 
       // Send processing message
       const processingMsg = await sendMessage(bot, { text: "🔄| Processing... Please wait a moment." }, authToken);
@@ -30,20 +29,20 @@ module.exports = {
       // Make the API request
       const { data } = await axios.get(upscaleUrl);
 
-      if (data?.image) {
-        sendMessage(
+      if (data?.response) {
+        await sendMessage(
           bot,
           {
             text: "✅| Here is your remini image:",
             attachment: {
               type: "image",
-              payload: { url: data.image }
+              payload: { url: data.response }
             }
           },
           authToken
         );
       } else {
-        sendMessage(bot, { text: "❌| Failed to get the upscaled image." }, authToken);
+        await sendMessage(bot, { text: "❌| Failed to get the upscaled image." }, authToken);
       }
 
       // Remove processing message
@@ -52,8 +51,8 @@ module.exports = {
       }
 
     } catch (error) {
-      console.error("4K command error:", error);
-      sendMessage(bot, { text: `❌| Error: ${error.message || "Something went wrong."}` }, authToken);
+      console.error("Remini command error:", error);
+      await sendMessage(bot, { text: `❌| Error: ${error.message || "Something went wrong."}` }, authToken);
     }
   }
 };
@@ -80,4 +79,4 @@ async function getRepliedImage(mid, authToken) {
   } catch {
     throw new Error("Failed to retrieve replied image.");
   }
-      }
+}
