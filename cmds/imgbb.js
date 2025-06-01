@@ -2,10 +2,10 @@ const axios = require("axios");
 const { sendMessage } = require('../handles/message');
 
 module.exports = {
-  name: "imgur",
-  description: "Uploads an image to Imgur.",
+  name: "imgbb",
+  description: "Uploads an image to imgbb.",
   role: 1,
-  author: "Clarence and GeoDevz69",
+  author: "GeoDevz69",
 
   async execute(bot, args, authToken, event) {
     if (!event?.sender?.id) {
@@ -15,24 +15,23 @@ module.exports = {
     }
 
     try {
-      const senderId = event.sender.id;
       const imageUrl = await extractImageUrl(event, authToken);
 
       if (!imageUrl) {
-        sendMessage(bot, { text: "Please reply to an image or send an image with the command to upload it to Imgur." }, authToken);
+        sendMessage(bot, { text: "Please reply to an image or send an image with the command to upload it to imgbb." }, authToken);
         return;
       }
 
-      const imgurResponse = await uploadToImgur(imageUrl);
+      const imgbbResponse = await uploadToImgbb(imageUrl);
 
-      if (imgurResponse?.uploaded?.status === "success") {
-        const imgurLink = imgurResponse.uploaded.image;
-        sendMessage(bot, { text: `Image uploaded to Imgur: ${imgurLink}` }, authToken);
+      if (imgbbResponse?.success) {
+        const imgbbLink = imgbbResponse.link;
+        sendMessage(bot, { text: `Image uploaded to imgbb: ${imgbbLink}` }, authToken);
       } else {
-        sendMessage(bot, { text: "Failed to upload the image to Imgur." }, authToken);
+        sendMessage(bot, { text: "Failed to upload the image to imgbb." }, authToken);
       }
     } catch (error) {
-      console.error("Error in Imgur command:", error);
+      console.error("Error in imgbb command:", error);
       sendMessage(bot, { text: `Error: ${error.message || "Something went wrong."}` }, authToken);
     }
   }
@@ -40,7 +39,6 @@ module.exports = {
 
 async function extractImageUrl(event, authToken) {
   try {
-
     if (event.message.reply_to?.mid) {
       return await getRepliedImage(event.message.reply_to.mid, authToken);
     }
@@ -65,13 +63,13 @@ async function getRepliedImage(mid, authToken) {
   }
 }
 
-async function uploadToImgur(imageUrl) {
+async function uploadToImgbb(imageUrl) {
   try {
-    const apiUrl = `https://kaiz-apis.gleeze.com/api/imgur?url=${encodeURIComponent(imageUrl)}`;
-    const response = await axios.get(apiUrl);
-    return response.data;
+    const apiUrl = `https://kaiz-apis.gleeze.com/api/imgbb?url=${encodeURIComponent(imageUrl)}`;
+    const { data } = await axios.get(apiUrl);
+    return data;
   } catch (error) {
-    console.error("Failed to upload to Imgur:", error);
+    console.error("Failed to upload to imgbb:", error);
     return null;
   }
-                                                                 }
+}
