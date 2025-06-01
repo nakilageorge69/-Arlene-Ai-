@@ -3,7 +3,7 @@ const { sendMessage } = require("../handles/message");
 
 module.exports = {
   name: "imgbb",
-  description: "Uploads an image to imgbb.",
+  description: "Uploads an image to imgbb using Kaiz API.",
   role: 1,
   author: "GeoDevz69",
 
@@ -19,12 +19,16 @@ module.exports = {
       console.log("Extracted Image URL:", imageUrl);
 
       if (!imageUrl) {
-        await sendMessage(bot, { text: "❌ Please reply to an image or send an image with the command to upload it to imgbb." }, authToken);
+        await sendMessage(
+          bot,
+          { text: "❌ Please reply to an image or send an image with the command to upload it to imgbb." },
+          authToken
+        );
         return;
       }
 
       const imgbbResponse = await uploadToImgbb(imageUrl);
-      console.log("imgbb upload response:", imgbbResponse);
+      console.log("Kaiz API imgbb response:", imgbbResponse);
 
       if (imgbbResponse && imgbbResponse.success) {
         const imgbbLink = imgbbResponse.link;
@@ -34,7 +38,11 @@ module.exports = {
       }
     } catch (error) {
       console.error("Error in imgbb command:", error);
-      await sendMessage(bot, { text: `❌ Error: ${error.message || "Something went wrong."}` }, authToken);
+      await sendMessage(
+        bot,
+        { text: `❌ Error: ${error.message || "Something went wrong."}` },
+        authToken
+      );
     }
   },
 };
@@ -72,13 +80,21 @@ async function getRepliedImage(mid, authToken) {
 
 async function uploadToImgbb(imageUrl) {
   try {
-    // UPDATED API ENDPOINT
-    const apiUrl = `https://api.imgbb-uploader.com/upload?url=${encodeURIComponent(imageUrl)}`;
+    const apiUrl = `https://kaiz-apis.gleeze.com/api/imgbb?url=${encodeURIComponent(
+      imageUrl
+    )}&apikey=ec7d563d-adae-4048-af08-0a5252f336d1`;
+
     const { data } = await axios.get(apiUrl);
-    console.log("imgbb API data:", data);
-    return data;
+    console.log("Kaiz API data:", data);
+
+    // Validate the expected response
+    if (data && data.success && data.link) {
+      return data;
+    }
+
+    return { success: false };
   } catch (error) {
-    console.error("Failed to upload to imgbb:", error);
-    return null;
+    console.error("Failed to upload to imgbb via Kaiz API:", error);
+    return { success: false };
   }
 }
