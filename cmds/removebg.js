@@ -5,7 +5,7 @@ module.exports = {
   name: "removebg",
   description: "Removes background from an image.",
   role: 1,
-  author: " created by: Mark Martinez",
+  author: "GeoDevz69",
 
   async execute(bot, args, authToken, event) {
     if (!event?.sender?.id) {
@@ -21,10 +21,11 @@ module.exports = {
         return;
       }
 
-      const apiUrl = `https://kaiz-apis.gleeze.com/api/removebg?url=${encodeURIComponent(imageUrl)}&stream=false`;
+      // Updated API URL
+      const apiUrl = `https://kaiz-apis.gleeze.com/api/removebg?url=${encodeURIComponent(imageUrl)}&stream=True&apikey=ec7d563d-adae-4048-af08-0a5252f336d1`;
       const response = await axios.get(apiUrl);
-      const finalUrl = response.data?.url;
 
+      const finalUrl = response.data?.url;
       if (finalUrl) {
         sendMessage(
           bot,
@@ -65,7 +66,7 @@ async function getRepliedImage(mid, authToken) {
   try {
     const { data } = await axios.get(`https://graph.facebook.com/v21.0/${mid}/attachments`, {
       params: { access_token: authToken }
-    }); 
+    });
     return data?.data[0]?.image_data?.url || "";
   } catch {
     throw new Error("Failed to retrieve replied image.");
