@@ -9,7 +9,7 @@ module.exports = {
 
   async execute(senderId, args, pageAccessToken) {
     try {
-      const response = await axios.get('https://autobot.mark-projects.site/api/shoti');
+      const response = await axios.get('https://shotis.vercel.app');
       const { playUrl, title } = response.data;
 
       await sendMessage(senderId, {
