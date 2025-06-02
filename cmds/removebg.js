@@ -1,85 +1,54 @@
-const axios = require("axios");
-const { sendMessage } = require("../handles/message");
+const axios = require('axios');
+const { APIs } = require ('../api');
+const { sendMessage } = require('../handles/sendMessage');
 
 module.exports = {
-  name: "removebg",
-  description: "Removes background from an image.",
-  role: 1,
-  author: "created by: GeoDevz69",
+  name: 'removebg',
+  description: 'Remove background from an image.',
+  category: 'Tools',
+  usage: 'Send an image, then type "removebg".',
+  author: 'Kaizenji',
 
-  async execute(bot, args, authToken, event) {
-    if (!event?.sender?.id) {
-      console.error("Missing sender ID.");
-      await sendMessage(bot, { text: "Error: Missing sender ID." }, authToken);
+  async execute(senderId, args, pageAccessToken, imageUrl = null) {
+    if (!imageUrl) {
+      await sendMessage(senderId, { text: '[ ℹ️ ] 𝖴𝗌𝖺𝗀𝖾: 𝖯𝗅𝖾𝖺𝗌𝖾 𝗌𝖾𝗇𝖽 𝖺𝗇 𝗂𝗆𝖺𝗀𝖾 𝖿𝗂𝗋𝗌𝗍, 𝗍𝗁𝖾𝗇 𝗍𝗒𝗉𝖾 "𝗋𝖾𝗆𝗈𝗏𝖾𝖻𝗀" 𝗍𝗈 𝗋𝖾𝗆𝗈𝗏𝖾 𝗍𝗁𝖾 𝖻𝖺𝖼𝗄𝗀𝗋𝗈𝗎𝗇𝖽.' }, pageAccessToken);
       return;
     }
 
-    try {
-      const imageUrl = await extractImageUrl(event, authToken);
-      if (!imageUrl) {
-        await sendMessage(bot, { text: "No image found. Please reply to an image or send an image directly. 😂" }, authToken);
-        return;
-      }
+    await sendMessage(senderId, { text: '[ ⏳ ] 𝖱𝖾𝗆𝗈𝗏𝗂𝗇𝗀 𝖻𝖺𝖼𝗄𝗀𝗋𝗈𝗎𝗇𝖽, 𝗉𝗅𝖾𝖺𝗌𝖾 𝗐𝖺𝗂𝗍...' }, pageAccessToken);
 
-      // Using the updated API structure
-      const apiUrl = "https://kaiz-apis.gleeze.com/api/removebgv2";
-      const response = await axios.get(apiUrl, {
-        params: {
-          url: imageUrl,
-          stream: true,
-          apikey: "ec7d563d-adae-4048-af08-0a5252f336d1"
+    try {
+      const apiUrl = `${APIs.kaiz}/api/removebgv2?url=${encodeURIComponent(imageUrl)}&stream=true&apikey=${APIs.kaizapikey}`;
+
+      const uploadApiUrl = `${APIs.imgur}/imgur?url=${encodeURIComponent(apiUrl)}`;
+      const response = await axios.get(uploadApiUrl, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+          'Accept': 'application/json',
         }
       });
 
-      // Log the response for debugging
-      console.log("API Response:", response.data);
+      const imgurData = response.data;
 
-      const finalUrl = response.data?.result?.url || response.data?.url;
-      if (finalUrl) {
-        await sendMessage(
-          bot,
-          {
-            attachment: {
-              type: "image",
-              payload: {
-                url: finalUrl
-              }
-            }
-          },
-          authToken
-        );
+      if (imgurData.uploaded && imgurData.uploaded.status === 'success') {
+        const imgurLink = imgurData.uploaded.image;
+        
+        await sendMessage(senderId, {
+          attachment: {
+            type: 'image',
+            payload: { url: imgurLink }
+          }
+        }, pageAccessToken);
       } else {
-        console.error("No URL in API response:", response.data);
-        await sendMessage(bot, { text: "Failed to get processed image. 🥲" }, authToken);
+        throw new Error('Imgur upload failed');
       }
-    } catch (err) {
-      console.error("Removebg command error:", err);
-      await sendMessage(bot, { text: `Error: ${err.message || "Something went wrong."}` }, authToken);
-    }
-  }
-};
 
-async function extractImageUrl(event, authToken) {
-  try {
-    if (event.message?.reply_to?.mid) {
-      return await getRepliedImage(event.message.reply_to.mid, authToken);
-    } else if (event.message?.attachments?.[0]?.type === "image") {
-      return event.message.attachments[0].payload.url;
-    }
-  } catch (err) {
-    console.error("Image extraction failed:", err);
-  }
-  return "";
+    } catch (error) {
+  console.error('Error message:', error.message);
+  const statusCode = error.response?.status || 'Unknown';
+  await sendMessage(senderId, {
+    text: `[ ❌ ] 𝖤𝗋𝗋𝗈𝗋: 𝖠𝖯𝖨 𝗋𝖾𝗊𝗎𝖾𝗌𝗍 𝖿𝖺𝗂𝗅𝖾𝖽. 𝖲𝗍𝖺𝗍𝗎𝗌 𝖢𝗈𝖽𝖾: ${statusCode}\n𝖯𝗅𝖾𝖺𝗌𝖾 𝖼𝗈𝗇𝗍𝖺𝖼𝗍 𝗍𝗁𝖾 𝖽𝖾𝗏𝖾𝗅𝗈𝗉𝖾𝗋.`
+  }, pageAccessToken);
 }
-
-async function getRepliedImage(mid, authToken) {
-  try {
-    const { data } = await axios.get(`https://graph.facebook.com/v21.0/${mid}/attachments`, {
-      params: { access_token: authToken }
-    });
-    return data?.data?.[0]?.image_data?.url || "";
-  } catch (err) {
-    console.error("Failed to retrieve replied image:", err);
-    throw new Error("Failed to retrieve replied image.");
-  }
-  }
+}
+};
